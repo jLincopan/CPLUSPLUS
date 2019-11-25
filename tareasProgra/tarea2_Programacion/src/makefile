@@ -20,4 +20,5 @@ main: $(OBJ)
 .PHONY: clean
 
 clean:
-	rm -f $(objectsDIR)/*.o *~ core $(INCDIR)/*~
+	rm -f $(objectsDIR)/*.o
+	rm -f ../src/main

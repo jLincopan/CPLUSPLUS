@@ -1,12 +1,12 @@
-headers=include
+headers = include
 compilador=g++
 CFLAGS=-I$(headers)
 
 objectsDIR=obj
 
 include = conecta4.h toqueFama.h
-
 objects = conecta4.o toqueFama.o
+
 OBJ = $(patsubst %,$(objectsDIR)/%,$(objects))
 
 $(objectsDIR)/%.o: src/%.cpp

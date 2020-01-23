@@ -376,18 +376,23 @@ static int menuInicio() {
 
 	int opcion;
 
-	printf("  _______ _____  ______  _____     ______ _   _     _____        __     __        \n");
-	printf(" |__   __|  __ \\|  ____|/ ____|   |  ____| \\ | |   |  __ \\     /\\\\ \\   / //\\     \n");
-	printf("    | |  | |__) | |__  | (___     | |__  |  \\| |   | |__) |   /  \\\\ \\_/ //  \\    \n");
-	printf("    | |  |  _  /|  __|  \\___ \\    |  __| | . ` |   |  _  /   / /\\ \\\\   // /\\ \\   \n");
-	printf("    | |  | | \\ \\| |____ ____) |   | |____| |\\  |   | | \\ \\  / ____ \\| |/ ____ \\  \n");
-	printf("    |_|  |_|  \\_\\______|_____/    |______|_| \\_|   |_|  \\_\\/_/    \\_\\_/_/    \\_\\ \n");
-	printf("                                                                                 \n");
+	printf("  _____                                    \n");
+	printf(" |_   _| _ ___ ___                         \n");
+	printf("   | || '_/ -_|_-<                         \n");
+	printf("   |_||_| \\___/__/__ _ _                   \n");
+	printf("                / -_) ' \\                  \n");
+	printf("                \\___|_||_|_                \n");
+	printf("                       | _ \\__ _ _  _ __ _ \n");
+	printf("                       |   / _` | || / _` |\n");
+	printf("                       |_|_\\__,_|\\_, \\__,_|\n");
+	printf("                                 |__/      \n");
+
+	printf("\n");
 
 	//Malditos carácteres de escape
 
 	printf("Bienvenido/a al Tres en raya, ¡el mejor juego del mundo mundial!\n\n");
-	printf("                                           ® 2019-9999 Palta INC. All rights reserved\n\n");
+  printf("                                ®2019-9999 Palta INC. All rights reserved\n\n");
 
 	printf("1) ¡Jugar ya!\n");
 	printf("2) Salir\n");

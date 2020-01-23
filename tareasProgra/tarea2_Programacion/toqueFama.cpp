@@ -33,8 +33,8 @@ int toqueFama() {
 	printf(" |_|  |_|\\___/ \\__, |\\__,_|\\___|    \\__, |   |_|  \\__,_|_| |_| |_|\\__,_(_)\n");
 	printf("                  | |                __/ |                                \n");
 	printf("                  |_|               |___/                                 \n\n");
-	printf("Bienvenido/a a conecta4, ¡el tercer mejor juego del mundo mundial!\n\n");
-	printf("                                           ®2019-9999 Palta INC. All rights reserved\n\n");
+	printf("Bienvenido/a al Toque y Fama, ¡el tercer mejor juego del mundo mundial!\n\n");
+	printf("                                ®2019-9999 Palta INC. All rights reserved\n\n");
 
 
 	while(1) {

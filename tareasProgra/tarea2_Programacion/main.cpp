@@ -20,10 +20,11 @@ int main(int argc, char **argv) {
 	printf(" | |    | | |  | |  __|| | |_ | |  | |\\___ \\      | || |    |  __|   | |\n");
 	printf(" | | |__| | |__| | |___| |__| | |__| |____) |    _| || |____| |____  | |\n");
 	printf(" | |\\____/ \\____/|______\\_____|\\____/|_____/    |_____\\_____|_____|  | |\n");
-	printf(" | |                                                                 | |\n");
 	printf(" |_|____ ______ ______ ______ ______ ______ ______ ______ ______ ____|_|\n");
 	printf(" |______|______|______|______|______|______|______|______|______|______|\n\n");
 
+	printf("Bienvenido/a a JuegosICE, ¡La mejor colección de juegos del mundo mundial!\n");
+  printf("                                ®2019-9999 Palta INC. All rights reserved\n\n");
 
 	while(1) {
 

@@ -387,7 +387,7 @@ static int menuInicio() {
 	//Malditos carácteres de escape
 
 	printf("Bienvenido/a a conecta4, ¡el segundo mejor juego del mundo mundial!\n\n");
-	printf("                                           ®2019-9999 Palta INC. All rights reserved\n\n");
+  printf("                                ®2019-9999 Palta INC. All rights reserved\n\n");
 
 	printf("1) ¡Jugar ya!\n");
 	printf("2) Salir\n");

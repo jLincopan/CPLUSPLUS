@@ -21,14 +21,26 @@ bool ganador = false;
 bool turnoJ = true;
 //Función principal del juego
 int toqueFama() {
-	
+
 	int a;
 	printf("\e[2J\e[H");
+
+	printf("  _ _______                                   ______                    _ \n");
+	printf(" (_)__   __|                                 |  ____|                  | |\n");
+	printf(" | |  | | ___   __ _ _   _  ___     _   _    | |__ __ _ _ __ ___   __ _| |\n");
+	printf(" | |  | |/ _ \\ / _` | | | |/ _ \\   | | | |   |  __/ _` | '_ ` _ \\ / _` | |\n");
+	printf(" | |  | | (_) | (_| | |_| |  __/   | |_| |   | | | (_| | | | | | | (_| |_|\n");
+	printf(" |_|  |_|\\___/ \\__, |\\__,_|\\___|    \\__, |   |_|  \\__,_|_| |_| |_|\\__,_(_)\n");
+	printf("                  | |                __/ |                                \n");
+	printf("                  |_|               |___/                                 \n\n");
+	printf("Bienvenido/a a conecta4, ¡el tercer mejor juego del mundo mundial!\n\n");
+	printf("                                           ®2019-9999 Palta INC. All rights reserved\n\n");
+
 
 	while(1) {
 		printf("\n\nIngrese la dificultad (cantidad de dígitos, 2-5)\n\n");
 		a = scanf("%i", &dificultad);
-		
+
 		if(dificultad < 2 || dificultad > 5 || a != 1) {
 			printf("\nEl valor ingresado no es válido por favor... Inténtelo nuevamente");
 			printf("\e[2J\e[H");
@@ -37,12 +49,12 @@ int toqueFama() {
 		}
 	inf = elevar((dificultad-2), 10); //Límite inferior del rango de números para el bot
 	sup = (elevar(dificultad-1, 10)) - 1;//Límite superior
-	
+
 	int numeroUsuario[dificultad];
 	int jugadaUsuario[dificultad];
     int numeroBot[dificultad];
     int jugadaBot[dificultad];
-    
+
     printf("\e[2J\e[H");
 
     while(aprobado == false) {
@@ -56,19 +68,19 @@ int toqueFama() {
 			}
 	}
 	aprobado = false;
-	
+
 	    //El bot elije su número para la partida
 	    do {
 		numero = numAleatorio(inf, sup); //generamos un número dentro del rango
 		aprobado = separarNum(numero, numeroBot); //Solo se aprueba si np se repite ningún dígito
 		} while(aprobado == false);
-		
+
 	aprobado = false;
-	
+
 	for(int i = 0; i <= dificultad - 1; i++) {
 		printf("%i ", numeroBot[i]);
 		}
-	
+
 	printf("\e[2J\e[H");
 	//¡Empieza el juego!
 	while(ganador == false) {
@@ -77,10 +89,10 @@ int toqueFama() {
 		turnoJ = false;
 		turnoBot(jugadaBot);
 		compararJugadas(jugadaBot, numeroUsuario);
-		
+
 		printf("Toques jugador: %i     Famas jugador: %i                              Turno n°: %i\n\n", toquesJugador, famasJugador, turnos);
 		printf("Toques pc: %i          Famas pc: %i\n\n", toquesBot, famasBot);
-		
+
 		if(famasJugador == dificultad) {
 			ganador = true;
 			printf("\n\n¡Felicidades!, le ganaste al bot\n\n");
@@ -109,16 +121,16 @@ int numAleatorio(int inf, int sup) {
 	int numero = (rand() % (sup-inf+1))+ inf; //Generamos un número, y lo acotamos dentro del rango
 	return numero;
 	}
-	
+
 //Separando el número recibido como parámetro en dígitos y guárdandolo en el array también recibido
 //como parámetro
 bool separarNum(int num, int array[]) {
 	int resto;
 	int contador = dificultad - 1;
 	int digitos = 0;
-	
+
 	while(num > 0) {
-		
+
 		resto = num%10;
 		num = num/10;
 		array[contador] = resto;
@@ -129,8 +141,8 @@ bool separarNum(int num, int array[]) {
 
 		if(digitos != dificultad) {
 			return false;
-			} 
-			
+			}
+
 	//Verificando si algún dígito se repite, recorremos
 	//todo el array comparándo los números de derecha a izquierda
 	for(int i = dificultad - 1; i >= 0; i--) {
@@ -145,11 +157,11 @@ bool separarNum(int num, int array[]) {
 		}
 	return true;
 	}
-	
+
 //Función para la operación potencia un número, en el juego se usa para determinar
 //el rango de números que puede "elegir" el pc
-int elevar(int exponente, int base) { 
-	
+int elevar(int exponente, int base) {
+
 	int resultado = base;
 	for(int i = 0; i < exponente; i++) {
 		resultado = resultado * base;
@@ -157,13 +169,13 @@ int elevar(int exponente, int base) {
 	return resultado;
 	}
 
-//Se encarga de pedir un número al usuario y procesarlo, además de verificar que no se repitan dígitos	
+//Se encarga de pedir un número al usuario y procesarlo, además de verificar que no se repitan dígitos
 int turnoJugador(int array[]) {
-	
+
 	int numeroIngresado;
-	
+
 	while(aprobado == false) {
-		printf("Haga su jugada, ¡sin dígitos repetidos!\n\n");	
+		printf("Haga su jugada, ¡sin dígitos repetidos!\n\n");
 		scanf("%i", &numeroIngresado);
 		aprobado = separarNum(numeroIngresado, array);
 		if(aprobado == false) {

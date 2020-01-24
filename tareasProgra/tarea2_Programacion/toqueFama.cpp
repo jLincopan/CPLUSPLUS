@@ -4,76 +4,55 @@
 #include <time.h> //Para los números aleatorios
 #include "toqueFama.h"
 
-int limiteSuperior;
-int limiteInferior;
-int numero;
-int dificultad;
-int sup;
-int inf;
-int toquesJugador = 0;
-int famasJugador = 0;
-int toquesBot = 0;
-int famasBot = 0;
-int turnos = 1;
+static int limiteSuperior;
+static int limiteInferior;
+static int numero;
+static int dificultad;
+static int sup;
+static int inf;
+static int toquesJugador = 0;
+static int famasJugador = 0;
+static int toquesBot = 0;
+static int famasBot = 0;
+static int aciertos = 0;
+static int turnos = 1;
 
-bool aprobado = false;
-bool ganador = false;
-bool turnoJ = true;
+static bool aprobado = false;
+static bool ganador = false;
+static bool turnoJ = true;
+
 //Función principal del juego
 int toqueFama() {
-
-	int a;
-	printf("\e[2J\e[H");
-
-	printf("  _ _______                                   ______                    _ \n");
-	printf(" (_)__   __|                                 |  ____|                  | |\n");
-	printf(" | |  | | ___   __ _ _   _  ___     _   _    | |__ __ _ _ __ ___   __ _| |\n");
-	printf(" | |  | |/ _ \\ / _` | | | |/ _ \\   | | | |   |  __/ _` | '_ ` _ \\ / _` | |\n");
-	printf(" | |  | | (_) | (_| | |_| |  __/   | |_| |   | | | (_| | | | | | | (_| |_|\n");
-	printf(" |_|  |_|\\___/ \\__, |\\__,_|\\___|    \\__, |   |_|  \\__,_|_| |_| |_|\\__,_(_)\n");
-	printf("                  | |                __/ |                                \n");
-	printf("                  |_|               |___/                                 \n\n");
-	printf("Bienvenido/a al Toque y Fama, ¡el tercer mejor juego del mundo mundial!\n\n");
-	printf("                                ®2019-9999 Palta INC. All rights reserved\n\n");
-
-
-	while(1) {
-		printf("\n\nIngrese la dificultad (cantidad de dígitos, 2-5)\n\n");
-		a = scanf("%i", &dificultad);
-
-		if(dificultad < 2 || dificultad > 5 || a != 1) {
-			printf("\nEl valor ingresado no es válido por favor... Inténtelo nuevamente");
-			printf("\e[2J\e[H");
-			dificultad = 0;
-			} else {break;}
-		}
+	pantallaInicio();
 	inf = elevar((dificultad-2), 10); //Límite inferior del rango de números para el bot
 	sup = (elevar(dificultad-1, 10)) - 1;//Límite superior
 
 	int numeroUsuario[dificultad];
 	int jugadaUsuario[dificultad];
-    int numeroBot[dificultad];
-    int jugadaBot[dificultad];
+  int numeroBot[dificultad];
+  int jugadaBot[dificultad];
+	int aciertosBot[dificultad];
 
-    printf("\e[2J\e[H");
+  printf("\e[2J\e[H");
 
-    while(aprobado == false) {
+  while(aprobado == false) {
 
-		printf("\n\nElija su número para la partida, (%i dígitos sin repetir)\n\n", dificultad);
-		scanf("%i", &numero);
-		aprobado = separarNum(numero, numeroUsuario);
-		if(aprobado == false) {
-			printf("\e[2J\e[H");
-			printf("\bEl número ingresado no es válido\n");
-			}
+	printf("\n\nElija su número para la partida, (%i dígitos sin repetir)\n\n", dificultad);
+	    fflush(stdin);
+	scanf("%i", &numero);
+	aprobado = separarNum(numero, numeroUsuario);
+	if(aprobado == false) {
+		printf("\e[2J\e[H");
+		printf("\bEl número ingresado no es válido\n");
+		}
 	}
 	aprobado = false;
 
-	    //El bot elije su número para la partida
-	    do {
-		numero = numAleatorio(inf, sup); //generamos un número dentro del rango
-		aprobado = separarNum(numero, numeroBot); //Solo se aprueba si np se repite ningún dígito
-		} while(aprobado == false);
+	//El bot elije su número para la partida
+	do {
+			numero = numAleatorio(inf, sup); //generamos un número dentro del rango
+			aprobado = separarNum(numero, numeroBot); //Solo se aprueba si no se repite ningún dígito
+	} while(aprobado == false);
 
 	aprobado = false;
 
@@ -83,25 +62,53 @@ int toqueFama() {
 
 	printf("\e[2J\e[H");
 	//¡Empieza el juego!
+	//Definimos las variables de nuevo para asegurarnos de que no hayan problemas al abrir
+	//El mismo juego de nuevo desde el menú
+	toquesJugador = 0;
+	famasJugador = 0;
+	toquesBot = 0;
+	famasBot = 0;
+	aciertos = 0;
+	turnos = 1;
+
+	ganador = false;
+	turnoJ = true;
+
 	while(ganador == false) {
 		turnoJugador(jugadaUsuario);
-		compararJugadas(jugadaUsuario, numeroBot);
+		compararJugadas(jugadaUsuario, numeroBot, aciertosBot);
 		turnoJ = false;
 		turnoBot(jugadaBot);
-		compararJugadas(jugadaBot, numeroUsuario);
+		compararJugadas(jugadaBot, numeroUsuario, aciertosBot);
 
 		printf("Toques jugador: %i     Famas jugador: %i                              Turno n°: %i\n\n", toquesJugador, famasJugador, turnos);
-		printf("Toques pc: %i          Famas pc: %i\n\n", toquesBot, famasBot);
+		printf("Toques pc: %i          Famas pc: %i\n", toquesBot, famasBot);
+		printf("Numeros encontrados por el pc: ");
+		for(int i = 0; i < dificultad; i++) {
+				if(aciertosBot[i] < 0 || aciertosBot[i] > 9) { //Para excluir los números fuera de rango de un array sin inicializar
+					printf("_ ");
+				} else {
+					printf("%i ", aciertosBot[i]);
+				}
+		}
+
+		printf("\n\n");
 
 		if(famasJugador == dificultad) {
 			ganador = true;
-			printf("\n\n¡Felicidades!, le ganaste al bot\n\n");
+			printf("\n\n¡Felicidades!, le ganaste al bot en %i turnos\n\n", turnos);
 			return 0;
 			}
-			else if (famasBot == dificultad) {
-			ganador = true;
-			printf("\n\n¡Has sido derrotado por el booooot! (Skynet is coming)\n\n");
-			return 0;
+			else if (aciertos == dificultad) {
+				ganador = true;
+
+				printf("\e[2J\e[H");
+				printf("El número del pc era: ");
+				for(int i = 0; i < dificultad; i++) {
+						printf("%i", numeroBot[i]);
+				}
+				printf("\n\n¡Has sido derrotado por el booooot en %i turnos!, Skynet is coming\n\n", turnos);
+				return 0;
 			}
 				else {
 				turnos++;
@@ -112,7 +119,6 @@ int toqueFama() {
 				famasBot = 0;
 				}
 		}
-	return 0;
 	}
 
 //Genera un número aleatorio dentro del rango que recibe como parámetro
@@ -136,7 +142,6 @@ bool separarNum(int num, int array[]) {
 		array[contador] = resto;
 		contador--;
 		digitos++;
-
 		}
 
 		if(digitos != dificultad) {
@@ -200,7 +205,34 @@ int turnoBot(int array[]) {
 	return numBot_generado;
 }
 
-void compararJugadas(int jugador[], int bot[]) {
+void pantallaInicio() {
+	int a;
+	printf("\e[2J\e[H");
+
+	printf("  _ _______                                   ______                    _ \n");
+	printf(" (_)__   __|                                 |  ____|                  | |\n");
+	printf(" | |  | | ___   __ _ _   _  ___     _   _    | |__ __ _ _ __ ___   __ _| |\n");
+	printf(" | |  | |/ _ \\ / _` | | | |/ _ \\   | | | |   |  __/ _` | '_ ` _ \\ / _` | |\n");
+	printf(" | |  | | (_) | (_| | |_| |  __/   | |_| |   | | | (_| | | | | | | (_| |_|\n");
+	printf(" |_|  |_|\\___/ \\__, |\\__,_|\\___|    \\__, |   |_|  \\__,_|_| |_| |_|\\__,_(_)\n");
+	printf("                  | |                __/ |                                \n");
+	printf("                  |_|               |___/                                 \n\n");
+	printf("Bienvenido/a al Toque y Fama, ¡el tercer mejor juego del mundo mundial!\n\n");
+	printf("                                ®2019-9999 Palta INC. All rights reserved\n\n");
+
+
+	while(1) {
+		printf("\n\nIngrese la dificultad (cantidad de dígitos, 2-5)\n\n");
+		a = scanf("%i", &dificultad);
+
+		if(dificultad < 2 || dificultad > 5 || a != 1) {
+			printf("\nEl valor ingresado no es válido por favor... Inténtelo nuevamente");
+			printf("\e[2J\e[H");
+			dificultad = 0;
+			} else {break;}
+		}
+}
+void compararJugadas(int jugador[], int bot[], int aciertosBot[]) {
 	//Busca toques y famas
 	if(turnoJ) {
 		for(int a = 0; a < dificultad; a++) {
@@ -209,7 +241,8 @@ void compararJugadas(int jugador[], int bot[]) {
 					if(a == b) {
 						famasJugador++;
 						} else {
-							toquesJugador++;}
+							toquesJugador++;
+						}
 					}
 				}
 			}
@@ -221,8 +254,13 @@ void compararJugadas(int jugador[], int bot[]) {
 				if(bot[a] == jugador[b]) {
 					if(a == b) {
 						famasBot++;
+						if(aciertosBot[a] == jugador[a]) { //Un control adicional para las famas del pc
+							aciertos++;                      //Sin esto tomaría como "número encontrado"
+						}                                  //Los ceros del array no inicializado
+						aciertosBot[a] = bot[a];
 						} else {
-							toquesBot++;}
+							toquesBot++;
+						}
 					}
 				}
 			}

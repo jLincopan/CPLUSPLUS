@@ -1,3 +1,36 @@
+/*
+--------------------------------------------------------
+|                        MMMMMMM                       |       Universidad de La Frontera
+|                  MM              MM                  |
+|               M                      M               |
+|             M                          MM            |       ICC-202 PROGRAMACION DE COMPUTADORES
+|           M          $$$$   $$$$                     |
+|         M        $$   $$$   $$    $$       M         |       Tarea 2
+|        M       $$$$$    $   $    $$$$$      $        |
+|       M      $$$$$$$$          $$$$$$$$$     M       |       Autores:  -Javier Lincopán, (j.lincopan01@ufromail.cl)
+|      M      $$$$$$$$$$$$$   $$$$$$$$$$$$$     $      |                 -Samuel Orellana, (s.orellana02@ufromail.cl)
+|            $$$$$$$$$$$$$$   $$$$$$$$$$$$$$     M     |
+|     M        $$$$$$$$$$$$   $$$$$$$$$$$$        M    |
+|               $$$$$$$$$$$   $$$$$$$$$$               |
+|    M     $$    $$$$$$$        $$$$$$$    $$$    M    |      Descripción general del programa: un compendio de juegos!
+|    M     $$$$   $$$$$          $$$$$$   $$$$    M    |
+|    M                                            M    |
+|    M                                            M    |
+|    M     $$$M   $$$$$,         $$$$$$   $$$$    M    |
+|    M     $$    $$$$$$$4       $$$$$$$M    $$    M    |
+|               $$$$$$$$$$$   $$$$$$$$$$M         M    |
+|     M       0$$$$$$$$$$$$   $$$$$$$$$$$$$            |
+|            $$$$$$$$$$$$$$   $$$$$$$$$$$$$M           |
+|      M      $$$$$$$$$$$$     $$$$$$$$$$$$     M      |
+|       M      $$$$$$$$           $$$$$$$      M       |
+|        M       $$$$     $   $    $$$$$      M        |
+|          M       $    $$$   $$$    $       M         |
+|           M          $$$$   $$$$         M           |
+|             M                          M             |
+|                MM                   M                |
+|                    MM M MMMMM  MMM                   |
+|------------------------------------------------------|
+ * */
 #include <stdio.h>
 #include <stdlib.h> //Para los números aleatorios
 #include <time.h> //Para los números aleatorios
@@ -5,6 +38,12 @@
 #include "toqueFama.h"
 #include "conecta4.h"
 #include "tresRaya.h"
+
+/* * Nombre de la función: main.
+* Tipo de función: int.
+* Parámetros: "array" de tipo int[].
+* Dato de retorno: "0" si termina con éxito
+* Descripción de la función: la función principal de todo! */
 
 int main(int argc, char **argv) {
 

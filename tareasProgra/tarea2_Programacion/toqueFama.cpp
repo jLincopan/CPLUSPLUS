@@ -21,7 +21,13 @@ static bool aprobado = false;
 static bool ganador = false;
 static bool turnoJ = true;
 
-//Función principal del juego
+/* * Nombre de la función: toqueFama.
+* Tipo de función: int.
+* Parámetros: ninguno.
+* Dato de retorno: un "0" si termina con éxito.
+* Descripción de la función: La función principal del juego, se ejecuta hasta que
+* haya un ganador */
+
 int toqueFama() {
 	pantallaInicio();
 	inf = elevar((dificultad-2), 10); //Límite inferior del rango de números para el bot
@@ -121,15 +127,28 @@ int toqueFama() {
 		}
 	}
 
-//Genera un número aleatorio dentro del rango que recibe como parámetro
+/* * Nombre de la función: numAleatorio.
+* Tipo de función: int.
+* Parámetros: "inf" de tipo int.
+*             "sup" de tipo int.
+* Dato de retorno: "numero", de tipo int.
+* Descripción de la función: genera un número aleatorio dentro del rango superior e
+* inferior que recibe como parámetro */
+
 int numAleatorio(int inf, int sup) {
 	srand(time(NULL)); //Usamos la hora actual como semilla para "randomizar"
 	int numero = (rand() % (sup-inf+1))+ inf; //Generamos un número, y lo acotamos dentro del rango
 	return numero;
 	}
 
-//Separando el número recibido como parámetro en dígitos y guárdandolo en el array también recibido
-//como parámetro
+/* * Nombre de la función: separarNum.
+* Tipo de función: bool.
+* Parámetros: "num" de tipo int.
+*             "array" de tipo int[].
+* Dato de retorno: false si hay algún dígito repetido en "num" o true si no lo hay.
+* Descripción de la función: separa el número recibido como parámetro en dígitos y lo guarda
+* en el array también recibido como parámetro. */
+
 bool separarNum(int num, int array[]) {
 	int resto;
 	int contador = dificultad - 1;
@@ -163,8 +182,14 @@ bool separarNum(int num, int array[]) {
 	return true;
 	}
 
-//Función para la operación potencia un número, en el juego se usa para determinar
-//el rango de números que puede "elegir" el pc
+/* * Nombre de la función: elevar.
+* Tipo de función: int.
+* Parámetros: "exponente" de tipo int.
+*             "base" de tipo int.
+* Dato de retorno: "resultado" de tipo int.
+* Descripción de la función: función para implementar la operación potencia de un número in tener que incluir
+* otra librería, en el juego se usa para determinar el rango de números que puede "elegir" el pc */
+
 int elevar(int exponente, int base) {
 
 	int resultado = base;
@@ -174,7 +199,13 @@ int elevar(int exponente, int base) {
 	return resultado;
 	}
 
-//Se encarga de pedir un número al usuario y procesarlo, además de verificar que no se repitan dígitos
+/* * Nombre de la función: turnoJugador.
+* Tipo de función: int.
+* Parámetros: "array" de tipo int[].
+* Dato de retorno: "numeroIngresado", de tipo int.
+* Descripción de la función: Se encarga de pedir un número al usuario y
+* procesarlo, además de verificar que no se repitan dígitos usando la función separarNum */
+
 int turnoJugador(int array[]) {
 
 	int numeroIngresado;
@@ -194,8 +225,13 @@ int turnoJugador(int array[]) {
 	return numeroIngresado;
 }
 
+/* * Nombre de la función: turnoBot.
+* Tipo de función: int.
+* Parámetros: "array" de tipo int[].
+* Dato de retorno: "numBot_generado", de tipo int.
+* Descripción de la función: se encarga de generar un número aleatorio, que será la jugada del bot */
+
 int turnoBot(int array[]) {
-	//Se encarga de generar un número aleatorio, que será la jugada del bot
 	int numBot_generado;
 	while(aprobado == false) {
 		numBot_generado = numAleatorio(inf, sup);
@@ -204,6 +240,13 @@ int turnoBot(int array[]) {
 	aprobado = false;
 	return numBot_generado;
 }
+
+/* * Nombre de la función: pantallaInicio.
+* Tipo de función: void.
+* Parámetros: ninguno.
+* Dato de retorno: ninguno.
+* Descripción de la función: se encarga de mostrar el mensaje de bienvenida al juego
+* y de solicitar al usuario que ingrese la dificultad */
 
 void pantallaInicio() {
 	int a;
@@ -232,6 +275,14 @@ void pantallaInicio() {
 			} else {break;}
 		}
 }
+
+/* * Nombre de la función: compararJugadas.
+* Tipo de función: void.
+* Parámetros: "jugador" de tipo int[], bot de tipo int[], aciertosBot de tipo int[].
+* Dato de retorno: ninguno
+* Descripción de la función: se encarga de comparar las jugadas para determinar la cantidad
+* de toques y famas */
+
 void compararJugadas(int jugador[], int bot[], int aciertosBot[]) {
 	//Busca toques y famas
 	if(turnoJ) {

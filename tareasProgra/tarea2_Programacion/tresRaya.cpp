@@ -20,6 +20,14 @@ static bool turnoJugador2 = false;
 
 static char caracterMatch;
 
+/* * Nombre de la función: tresRaya.
+* Tipo de función: static void.
+* Parámetros: ninguno
+* Dato de retorno: ninguno
+* Descripción de la función: La función principal,
+* ejecuta el juego hasta que haya un ganador y se encarga de la pantalla
+* de inicio del juego */
+
  void tresRaya() { //Función principal del juego
 
 	printf("\e[2J\e[H");
@@ -41,7 +49,13 @@ static char caracterMatch;
 		}
 	}
 
-//Llena el tablero con Os
+/* * Nombre de la función: generarPantalla.
+* Tipo de función: static void.
+* Parámetros: ninguno
+* Dato de retorno: ninguno
+* Descripción de la función: Se encarga de "inicializar"
+* el tablero con el caracter que contenga la variable "caracterFondo" */
+
 static void generarPantalla() {
 
 	for(int a = 0; a < ancho; a++) { //Recorriendo el tablero
@@ -55,7 +69,13 @@ static void generarPantalla() {
 
 	}
 
-//Muestra el tablero actualizado
+/* * Nombre de la función: mostrarTablero.
+* Tipo de función: static void.
+* Parámetros: ninguno
+* Dato de retorno: ninguno
+* Descripción de la función: Muestra en pantalla lo que contenga el array
+* que representa el tablero de juego */
+
 static void mostrarTablero() {
 
 	printf("\n\n-");
@@ -105,7 +125,15 @@ static void mostrarTablero() {
 
 		printf("\n");
 }
-//Función que registra las jugadas, y además valida las entradas
+
+/* * Nombre de la función: registrarJugada.
+* Tipo de función: static int.
+* Parámetros: ninguno
+* Dato de retorno: retorna "0" si la validación
+* de las coordenadas ingresadas por el usuario es exitosa, o
+* un "1" si falla
+* Descripción de la función: Función que registra las jugadas, y además valida las entradas */
+
 static int registrarJugada() {
 
 	//Variables para las coordenadas en el tablero
@@ -188,7 +216,13 @@ static int registrarJugada() {
 	return 0;
 	}
 
-//Función que verifica si hay algún ganador buscando 4 "matchs" en todas las direcciones posibles
+/* * Nombre de la función: verificarSiHayGanador.
+* Tipo de función: static int.
+* Parámetros: ninguno
+* Dato de retorno: retorna "0" si hay un ganador, o un "1" si no
+* Descripción de la función: Función que verifica si hay algún ganador
+* buscando 4 "matchs" en todas las direcciones posibles */
+
 static int verificarSiHayGanador() {
 
 	int contador = 0; //Contador para los "matchs"
@@ -201,16 +235,13 @@ static int verificarSiHayGanador() {
 	for(int i = 0; i < espaciosPorVerificar; i++) {
 
 		if(tablero[ultimaJugadaY][ultimaJugadaX-i] == caracterMatch) {
-			//printf("\nx = %i y = %i\n", ultimaJugadaX-i, ultimaJugadaY);
 			contador++;
 			espaciosVerificados++;
-			//printf("\n1) %i", contador);
 			} else {
 				break;
 				}
 		}
 		if (contador == espaciosPorVerificar) {
-			//printf("\n1) %i", contador);
 			return 1;
 			}
 			contador--;
@@ -221,16 +252,13 @@ static int verificarSiHayGanador() {
 		for(int i = 0; i < espaciosPorVerificar; i++) {
 
 			if(tablero[ultimaJugadaY][ultimaJugadaX+i] == caracterMatch) {
-				//printf("\nx = %i y = %i\n", ultimaJugadaX+i, ultimaJugadaY);
 				contador++;
-				//printf("\n2) %i", contador);
 				} else {
 					break;
 					}
 
 			}
 		if(contador == espaciosPorVerificar) {
-			//printf("\n2) %i", contador);
 			return 1;
 
 			}
@@ -245,7 +273,6 @@ static int verificarSiHayGanador() {
 			for(int i = 0; i < espaciosPorVerificar; i++) {
 
 				if(tablero[ultimaJugadaY-i][ultimaJugadaX] == caracterMatch) {
-					//printf("\nx = %i y = %i\n", ultimaJugadaX, ultimaJugadaY-i);
 					contador++;
 					espaciosVerificados++;
 
@@ -371,6 +398,14 @@ static int verificarSiHayGanador() {
 
 	}
 
+/* * Nombre de la función: menuInicio.
+* Tipo de función: static int.
+* Parámetros: ninguno
+* Dato de retorno: retorna "0" si se ingresa una opción válida, un "1" o un "2"
+* dependiendo de la opción que elija el usuario en el menú
+* Descripción de la función: Despliega el menú de inicio del juego y retorna la distintos
+* valores dependiendo de la elección del usuario */
+
 //Desplegamos la pantalla de inicio y las opciones
 static int menuInicio() {
 
@@ -410,6 +445,12 @@ static int menuInicio() {
 			}
 		return 0;
 	}
+
+/* * Nombre de la función: felicitaciones.
+* Tipo de función: static void.
+* Parámetros: ninguno.
+* Dato de retorno: ninguno.
+* Descripción de la función: Muestra un mensaje de felicitaciones al ganador del juego */
 
 static void felicitaciones() {
 

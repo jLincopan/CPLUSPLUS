@@ -8,10 +8,10 @@ _OBJS = main.o lista.o cola.o pila.o manejoDatos.o
 OBJS = $(patsubst %,$(ODIR)/%,$(_OBJS))
 
 $(ODIR)/%.o: $(SDIR)/%.cpp 
-	$(CC) -Wall -c $(INC) -o $@ $< $(CFLAGS) 
+	$(CC) -Wall -g -c $(INC) -o $@ $< $(CFLAGS) 
 
 $(OUT): $(OBJS) 
-	$(CC) -Wall $^ -o $(OUT)
+	$(CC) -Wall -g $^ -o $(OUT)
 
 .PHONY: clean
 

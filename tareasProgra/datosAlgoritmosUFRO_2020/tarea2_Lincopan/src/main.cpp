@@ -8,14 +8,13 @@ int main() {
     cabeceraVendedor inicioLista_vendedores;
     inicioLista_vendedores.largo = 0;
 
-    nodoVendedor* vendedorTMP;
+    nodoVendedor* nodoVendedores = new nodoVendedor;
     Vendedor tmp;
 
-
-
-	char caca[10];
-
 	registrarVendedor(tmp);
-	mostrarDatos_vendedor(tmp);	
+	nodoVendedores->dato = tmp;
+
+	mostrarDatos_vendedor(nodoVendedores->dato);	
+
     return 0;
 }

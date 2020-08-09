@@ -51,6 +51,6 @@
 
 
 	void registrarVendedor(Vendedor &buffer);
-	void leerLinea_texto(size_t largo, char buffer[]);
 	void mostrarDatos_vendedor(Vendedor vendedor);
+	void leerLinea_texto(size_t largo, char buffer[]);
 #endif

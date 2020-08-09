@@ -4,7 +4,7 @@ ODIR = obj
 SDIR = src
 INC = -I src/include
 
-_OBJS = main.o lista.o cola.o pila.o
+_OBJS = main.o lista.o cola.o pila.o manejoDatos.o
 OBJS = $(patsubst %,$(ODIR)/%,$(_OBJS))
 
 $(ODIR)/%.o: $(SDIR)/%.cpp 

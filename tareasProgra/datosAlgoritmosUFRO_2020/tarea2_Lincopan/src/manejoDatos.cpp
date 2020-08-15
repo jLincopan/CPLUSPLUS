@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include "include/manejoDatos.h"
+#include "include/listaVendedores.h"
+#include "include/listaClientes.h"
 
 long leerLong() {
     long a;
@@ -89,3 +91,58 @@ void mostrarDatos_vendedor(Vendedor vendedor) {
     printf("Profesión: %s\n", vendedor.profesion);
 }
 
+void registrarCliente(Cliente &buffer, Vendedor &vendedor) {
+
+    printf("Ingrese los datos del cliente:\n\n");
+
+    printf("ingrese su nombre:\n");
+    leerLinea_texto(sizeof(buffer.nombre), buffer.nombre);
+
+    printf("ingrese su apellido:\n");
+    leerLinea_texto(sizeof(buffer.apellido), buffer.apellido);
+
+    printf("ingrese su rut:\n");
+    leerLinea_texto(sizeof(buffer.rut), buffer.rut);
+
+    printf("ingrese su teléfono de contacto:\n");
+    buffer.telefono = leerLong();
+
+    getchar();
+    printf("ingrese su dirección:\n");
+    leerLinea_texto(sizeof(buffer.direccion), buffer.direccion);
+
+    printf("ingrese su edad:\n");
+    buffer.edad = leerInt();
+
+    getchar();
+    printf("ingrese su profesión:\n");
+    leerLinea_texto(sizeof(buffer.profesion), buffer.profesion);
+
+    printf("ingrese el monto que debe el cliente:\n$");
+    buffer.deuda= leerInt();
+
+    getchar();
+    printf("Ingrese la fecha de cobro:\n");
+    leerLinea_texto(sizeof(buffer.fechaCobro), buffer.fechaCobro);
+
+    insertarUltimo_listaClientes(buffer, vendedor.clientes);
+
+}
+
+void mostrarDatos_cliente(Cliente cliente) {
+    printf("Datos de los clientes:\n\n");
+
+    
+    printf("Nombre: %s\n", cliente.nombre);
+    printf("Apellido: %s\n", cliente.apellido);
+    printf("RUT: %s\n", cliente.rut);
+    printf("N° de teléfono: %li\n", cliente.telefono);  
+    printf("Dirección: %s\n", cliente.direccion);
+	printf("Edad: %i\n", cliente.edad);
+    printf("Profesión: %s\n", cliente.profesion);
+    printf("Fecha de cobro: %s\n", cliente.fechaCobro);
+}
+
+void mostrarDatos_clientes(Vendedor &vendedor) {
+    imprimeLista_clientes(vendedor);
+}

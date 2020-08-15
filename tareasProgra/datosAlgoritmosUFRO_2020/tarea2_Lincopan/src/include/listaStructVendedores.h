@@ -1,9 +1,10 @@
 #ifndef LISTA_STRUCT_H
-  #define LISTA_STRUCT_H
+	#define LISTA_STRUCT_H
 
-  #define tipoDato int
-  #include <stdio.h>
-  
+	#include <stdio.h>
+	#include "structVendedor.h"
+	#define tipoDato Vendedor
+
 struct nodo{
 	tipoDato dato;
 	struct nodo* next;
@@ -16,9 +17,9 @@ struct nodo{
 	}
 };
 
-struct Lista{
+struct ListaVendedores{
 	struct nodo* primero;
-	Lista(){
+	ListaVendedores(){
 		primero=NULL;
 	}
 };

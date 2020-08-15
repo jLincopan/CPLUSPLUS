@@ -1,20 +1,23 @@
 #include <stdio.h>
-#include <limits.h>
 #include <string.h>
-#include <assert.h>
+#include "include/listaVendedores.h"
+#include "include/listaClientes.h"
 #include "include/manejoDatos.h"
 
 int main() {
-    cabeceraVendedor inicioLista_vendedores;
-    inicioLista_vendedores.largo = 0;
-
-    nodoVendedor* nodoVendedores = new nodoVendedor;
     Vendedor tmp;
+    Cliente cliente_tmp;
 
+    ListaVendedores vendedores;
+    //ListaClientes clientes;
 	registrarVendedor(tmp);
-	nodoVendedores->dato = tmp;
+    insertarUltimo_listaVendedores(tmp, vendedores);
 
-	mostrarDatos_vendedor(nodoVendedores->dato);	
+    registrarCliente(cliente_tmp, tmp);
+    registrarCliente(cliente_tmp, tmp);
+    registrarCliente(cliente_tmp, tmp);
+
+    imprimeLista_clientes(tmp);
 
     return 0;
 }

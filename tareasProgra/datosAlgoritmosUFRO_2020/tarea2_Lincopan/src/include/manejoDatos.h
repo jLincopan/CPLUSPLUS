@@ -5,11 +5,12 @@
 
 	#include "listaClientes.h"
 	#include "listaStructClientes.h"
+	#include "listaStructVendedores.h"
 
 	void leerLinea_texto(size_t largo, char buffer[]);
-	void registrarVendedor(Vendedor &buffer);
+	void registrarVendedor(ListaVendedores &lista);
 	void mostrarDatos_vendedor(Vendedor vendedor);
 	void registrarCliente(Cliente &buffer, Vendedor &vendedor);
 	void mostrarDatos_cliente(Cliente cliente);
-	void mostrarDatos_clientes(Vendedor &vendedor);
+	void mostrarDatos_clientes(int id, ListaVendedores vendedores);
 #endif

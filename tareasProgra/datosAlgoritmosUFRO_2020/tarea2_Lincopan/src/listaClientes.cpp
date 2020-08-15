@@ -1,8 +1,8 @@
 #include <stdio.h>
 
+#include "include/manejoDatos.h"
 #include "include/listaClientes.h"
 #include "include/listaStructClientes.h"
-#include "include/manejoDatos.h"
 
 static int primerElemento_lista(ListaClientes lista){
 	return 1;
@@ -81,7 +81,7 @@ void eliminarDato_listaClientes(int p, ListaClientes &lista){
 }
 
 void imprimeLista_clientes(Vendedor &vendedor){
-	ListaClientes lista = vendedor.clientes;
+	ListaClientes lista;
 	Cliente tmp;
 	for(int i=primerElemento_lista(lista);i<largoLista_clientes(lista);i=avanzarLista(i,lista)){
 		tmp = obtenerDato_lista(i, lista);

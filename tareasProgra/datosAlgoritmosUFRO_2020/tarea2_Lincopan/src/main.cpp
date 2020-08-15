@@ -10,14 +10,14 @@ int main() {
 
     ListaVendedores vendedores;
     //ListaClientes clientes;
-	registrarVendedor(tmp);
+	registrarVendedor(vendedores);
     insertarUltimo_listaVendedores(tmp, vendedores);
 
     registrarCliente(cliente_tmp, tmp);
     registrarCliente(cliente_tmp, tmp);
     registrarCliente(cliente_tmp, tmp);
 
-    imprimeLista_clientes(tmp);
+    mostrarDatos_clientes(1, vendedores);
 
     return 0;
 }

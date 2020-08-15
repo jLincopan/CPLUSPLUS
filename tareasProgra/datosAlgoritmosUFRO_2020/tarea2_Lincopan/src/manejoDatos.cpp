@@ -46,37 +46,38 @@ void leerLinea_texto(size_t largo, char buffer[]) {
     strncpy(buffer, tmp, largo);
 }
 
-void registrarVendedor(Vendedor &buffer) {
-    
+void registrarVendedor(ListaVendedores &lista) {
+    Vendedor tmp;
     printf("Ingrese los datos del vendedor:\n\n");
 
     printf("Ingrese el número de cuenta bancaria: \n");
-    buffer.cuenta = leerLong();
+    tmp.cuenta = leerLong();
 
     getchar();
     printf("ingrese su nombre:\n");
-    leerLinea_texto(sizeof(buffer.nombre), buffer.nombre);
+    leerLinea_texto(sizeof(tmp.nombre), tmp.nombre);
 
     printf("ingrese su apellido:\n");
-    leerLinea_texto(sizeof(buffer.apellido), buffer.apellido);
+    leerLinea_texto(sizeof(tmp.apellido), tmp.apellido);
 
     printf("ingrese su rut:\n");
-    leerLinea_texto(sizeof(buffer.rut), buffer.rut);
+    leerLinea_texto(sizeof(tmp.rut), tmp.rut);
 
     printf("ingrese su teléfono de contacto:\n");
-    buffer.telefono = leerLong();
+    tmp.telefono = leerLong();
 
     getchar();
     printf("ingrese su dirección:\n");
-    leerLinea_texto(sizeof(buffer.direccion), buffer.direccion);
+    leerLinea_texto(sizeof(tmp.direccion), tmp.direccion);
 
     printf("ingrese su edad:\n");
-    buffer.edad = leerInt();
+    tmp.edad = leerInt();
 
     getchar();
     printf("ingrese su profesión:\n");
-    leerLinea_texto(sizeof(buffer.profesion), buffer.profesion);
-
+    leerLinea_texto(sizeof(tmp.profesion), tmp.profesion);
+    
+    insertarUltimo_listaVendedores(tmp, lista);
 }
 
 void mostrarDatos_vendedor(Vendedor vendedor) {
@@ -130,8 +131,6 @@ void registrarCliente(Cliente &buffer, Vendedor &vendedor) {
 }
 
 void mostrarDatos_cliente(Cliente cliente) {
-    printf("Datos de los clientes:\n\n");
-
     
     printf("Nombre: %s\n", cliente.nombre);
     printf("Apellido: %s\n", cliente.apellido);
@@ -143,6 +142,17 @@ void mostrarDatos_cliente(Cliente cliente) {
     printf("Fecha de cobro: %s\n", cliente.fechaCobro);
 }
 
-void mostrarDatos_clientes(Vendedor &vendedor) {
-    imprimeLista_clientes(vendedor);
+void mostrarDatos_clientes(int id, ListaVendedores vendedores) {
+    int largo = largoLista_vendedores(vendedores);
+
+    if(id < largo) {
+        printf("Error en función mostrarDatos_clientes: id no válida");
+        return;
+    }
+
+    Vendedor tmp = {0};
+    printf("Datos de los clientes:\n\n");
+
+    tmp = obtenerVendedor_lista(id, vendedores);
+    imprimeLista_clientes(tmp);
 }

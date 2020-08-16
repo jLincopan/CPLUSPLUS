@@ -10,7 +10,7 @@
 	void leerLinea_texto(size_t largo, char buffer[]);
 	void registrarVendedor(ListaVendedores &lista);
 	void mostrarDatos_vendedor(Vendedor vendedor);
-	void registrarCliente(Cliente &buffer, Vendedor &vendedor);
+	void registrarCliente(int id, ListaVendedores &lista);
 	void mostrarDatos_cliente(Cliente cliente);
-	void mostrarDatos_clientes(int id, ListaVendedores vendedores);
+	void mostrarDatos_clientes(int id, ListaVendedores &vendedores);
 #endif

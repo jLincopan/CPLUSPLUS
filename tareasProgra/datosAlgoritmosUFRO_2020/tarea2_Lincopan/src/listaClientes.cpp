@@ -81,11 +81,11 @@ void eliminarDato_listaClientes(int p, ListaClientes &lista){
 }
 
 void imprimeLista_clientes(Vendedor &vendedor){
-	ListaClientes lista;
+	ListaClientes lista = vendedor.clientes;
 	Cliente tmp;
 	for(int i=primerElemento_lista(lista);i<largoLista_clientes(lista);i=avanzarLista(i,lista)){
 		tmp = obtenerDato_lista(i, lista);
-		printf("\n\n[ID: %d]\n",i);
+		printf("\n[ID: %d]\n",i);
 		mostrarDatos_cliente(tmp);
 	}
 	printf("\n");

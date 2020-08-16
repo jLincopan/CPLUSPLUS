@@ -92,7 +92,8 @@ void mostrarDatos_vendedor(Vendedor vendedor) {
     printf("Profesión: %s\n", vendedor.profesion);
 }
 
-void registrarCliente(Cliente &buffer, Vendedor &vendedor) {
+void registrarCliente(int id, ListaVendedores &lista) {
+    Cliente buffer = {0};
 
     printf("Ingrese los datos del cliente:\n\n");
 
@@ -126,7 +127,7 @@ void registrarCliente(Cliente &buffer, Vendedor &vendedor) {
     printf("Ingrese la fecha de cobro:\n");
     leerLinea_texto(sizeof(buffer.fechaCobro), buffer.fechaCobro);
 
-    insertarUltimo_listaClientes(buffer, vendedor.clientes);
+    insertarUltimo_listaClientes(buffer, lista.primero->dato.clientes);
 
 }
 
@@ -142,17 +143,18 @@ void mostrarDatos_cliente(Cliente cliente) {
     printf("Fecha de cobro: %s\n", cliente.fechaCobro);
 }
 
-void mostrarDatos_clientes(int id, ListaVendedores vendedores) {
+void mostrarDatos_clientes(int id, ListaVendedores &vendedores) {
     int largo = largoLista_vendedores(vendedores);
 
-    if(id < largo) {
+    if(id > largo || listaVendedores_vacia(vendedores)) {
         printf("Error en función mostrarDatos_clientes: id no válida");
         return;
     }
 
     Vendedor tmp = {0};
-    printf("Datos de los clientes:\n\n");
-
     tmp = obtenerVendedor_lista(id, vendedores);
+    mostrarDatos_cliente(tmp.clientes.primero->dato);
+    printf("\n\nDatos de los clientes:\n");
+
     imprimeLista_clientes(tmp);
 }

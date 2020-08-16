@@ -5,17 +5,14 @@
 #include "include/manejoDatos.h"
 
 int main() {
-    Vendedor tmp;
-    Cliente cliente_tmp;
 
     ListaVendedores vendedores;
-    //ListaClientes clientes;
-	registrarVendedor(vendedores);
-    insertarUltimo_listaVendedores(tmp, vendedores);
 
-    registrarCliente(cliente_tmp, tmp);
-    registrarCliente(cliente_tmp, tmp);
-    registrarCliente(cliente_tmp, tmp);
+	registrarVendedor(vendedores);
+
+    registrarCliente(1, vendedores);
+    registrarCliente(1, vendedores);
+    registrarCliente(1, vendedores);
 
     mostrarDatos_clientes(1, vendedores);
 

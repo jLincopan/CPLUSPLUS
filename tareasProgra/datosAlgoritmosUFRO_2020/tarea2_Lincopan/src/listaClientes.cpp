@@ -57,7 +57,7 @@ int localizarDato_lista(tipoDato x, Lista lista){
 }
 */
 
-static tipoDato2 obtenerDato_lista(int p, ListaClientes lista){
+tipoDato2 obtenerCliente_lista(int p, ListaClientes lista){
 	nodo2* aux = lista.primero;
 	for(int i=1;i<p;i++) {
 		aux=aux->next;
@@ -84,7 +84,7 @@ void imprimeLista_clientes(Vendedor &vendedor){
 	ListaClientes lista = vendedor.clientes;
 	Cliente tmp;
 	for(int i=primerElemento_lista(lista);i<largoLista_clientes(lista);i=avanzarLista(i,lista)){
-		tmp = obtenerDato_lista(i, lista);
+		tmp = obtenerCliente_lista(i, lista);
 		printf("\n[ID: %d]\n",i);
 		mostrarDatos_cliente(tmp);
 	}

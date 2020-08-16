@@ -13,4 +13,5 @@
 	void registrarCliente(int id, ListaVendedores &lista);
 	void mostrarDatos_cliente(Cliente cliente);
 	void mostrarDatos_clientes(int id, ListaVendedores &vendedores);
+	int calcularCobro_vendedor(int id, ListaVendedores lista);
 #endif

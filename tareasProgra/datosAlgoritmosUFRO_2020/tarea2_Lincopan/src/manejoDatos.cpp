@@ -7,12 +7,12 @@
 long leerLong() {
     long a;
     long rc;
-    printf("enter a number: ");
+    printf("Ingrese un número: ");
     while ((rc = scanf("%li", &a)) == 0) { // Neither success (1) nor EOF
         // clear what is left, the * means only match and discard:
         scanf("%*[^\n]");
         // input was not a number, ask again:
-        printf("enter a number: ");
+        printf("Ingrese un número: ");
     }
     return a;
 }
@@ -140,6 +140,7 @@ void mostrarDatos_cliente(Cliente cliente) {
     printf("Dirección: %s\n", cliente.direccion);
 	printf("Edad: %i\n", cliente.edad);
     printf("Profesión: %s\n", cliente.profesion);
+    printf("Deuda: %li\n", cliente.deuda);
     printf("Fecha de cobro: %s\n", cliente.fechaCobro);
 }
 
@@ -157,4 +158,24 @@ void mostrarDatos_clientes(int id, ListaVendedores &vendedores) {
     printf("\n\nDatos de los clientes:\n");
 
     imprimeLista_clientes(tmp);
+}
+
+void eliminarVendedor() {
+
+}
+
+int calcularCobro_vendedor(int id, ListaVendedores lista) {
+
+    Vendedor vendedor = obtenerVendedor_lista(id, lista);
+    Cliente tmp;
+
+    int largo = largoLista_clientes(vendedor.clientes);
+    int total = 0;
+
+    for(int i = 1; i < largo; i++) {
+        tmp = obtenerCliente_lista(i, vendedor.clientes);
+        total = total + tmp.deuda;
+    }
+
+    return total;
 }

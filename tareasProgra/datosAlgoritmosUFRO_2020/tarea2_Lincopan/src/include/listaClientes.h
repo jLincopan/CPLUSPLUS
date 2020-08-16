@@ -12,5 +12,6 @@
   void eliminarDato_listaClientes(int p, ListaClientes &lista);
   void eliminarListaClientes(ListaClientes &lista);
   void insertarUltimo_listaClientes(tipoDato2 dato, ListaClientes &lista);
+  tipoDato2 obtenerCliente_lista(int p, ListaClientes lista);
 
 #endif

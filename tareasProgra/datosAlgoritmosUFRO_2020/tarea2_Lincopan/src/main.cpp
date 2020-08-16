@@ -15,6 +15,6 @@ int main() {
     registrarCliente(1, vendedores);
 
     mostrarDatos_clientes(1, vendedores);
-
+    printf("\nTotal a cobrar para el vendedor 1: %i", calcularCobro_vendedor(1, vendedores));
     return 0;
 }

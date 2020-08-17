@@ -9,9 +9,11 @@ int main() {
     ListaVendedores vendedores;
 
 	registrarVendedor(vendedores);
-    registrarCliente(1, vendedores);
-    registrarCliente(1, vendedores);
-
-    buscarCliente_rut(vendedores);
+	registrarVendedor(vendedores);
+	registrarVendedor(vendedores);
+    imprimeLista_vendedores(vendedores);
+    
+    eliminarVendedor_rut(vendedores);
+    imprimeLista_vendedores(vendedores);
     return 0;
 }

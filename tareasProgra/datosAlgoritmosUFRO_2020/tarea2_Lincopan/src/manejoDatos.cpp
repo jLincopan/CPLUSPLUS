@@ -160,10 +160,6 @@ void mostrarDatos_clientes(int id, ListaVendedores &vendedores) {
     imprimeLista_clientes(tmp);
 }
 
-void eliminarVendedor() {
-
-}
-
 int calcularCobro_vendedor(int id, ListaVendedores lista) {
 
     Vendedor vendedor = obtenerVendedor_lista(id, lista);
@@ -180,7 +176,7 @@ int calcularCobro_vendedor(int id, ListaVendedores lista) {
     return total;
 }
 
-void buscarVendedor_rut(ListaVendedores lista) {
+int buscarVendedor_rut(ListaVendedores lista) {
     Vendedor tmp;
     int largo = largoLista_vendedores(lista);
     char rutObjetivo[10] = {0};
@@ -194,11 +190,12 @@ void buscarVendedor_rut(ListaVendedores lista) {
         strncpy(rutBuffer, tmp.rut, sizeof(rutBuffer));
 
         if(strcmp(rutObjetivo, rutBuffer) == 0) {
-            printf("RUT encotrado, ID vendedor: %i\n", i);
-            return;
+            printf("RUT encontrado, ID vendedor: %i\n", i);
+            return i;
         }
     }
-    printf("\nRut no encontrado\n");    
+    printf("\nRut no encontrado\n");
+    return 0; //en cualquier funcion en que se use esta funcion, el cero deberia ser un error
 }
 
 void buscarCliente_rut(ListaVendedores lista) {
@@ -228,4 +225,11 @@ void buscarCliente_rut(ListaVendedores lista) {
         }
     }
     printf("\nRut no encontrado\n");    
+}
+
+void eliminarVendedor_rut(ListaVendedores &lista) {
+
+    int id = buscarVendedor_rut(lista);
+    eliminarDato_listaVendedores(id, lista);
+    printf("\nVendedor eliminado\n"); 
 }

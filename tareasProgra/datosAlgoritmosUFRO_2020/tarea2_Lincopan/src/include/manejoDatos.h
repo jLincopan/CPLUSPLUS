@@ -7,14 +7,17 @@
 	#include "listaStructClientes.h"
 	#include "listaStructVendedores.h"
 
+	void limpiarPantalla();
+	int leerInt();
 	void leerLinea_texto(size_t largo, char buffer[]);
 	void registrarVendedor(ListaVendedores &lista);
 	void mostrarDatos_vendedor(Vendedor vendedor);
-	void registrarCliente(int id, ListaVendedores &lista);
+	void registrarCliente(ListaVendedores &lista);
 	void mostrarDatos_cliente(Cliente cliente);
-	void mostrarDatos_clientes(int id, ListaVendedores &vendedores);
-	int calcularCobro_vendedor(int id, ListaVendedores lista);
+	void mostrarDatos_clientes(ListaVendedores &vendedores);
+	int calcularCobro_vendedor(ListaVendedores lista);
 	int buscarVendedor_rut(ListaVendedores lista);
 	void buscarCliente_rut(ListaVendedores lista);
 	void eliminarVendedor_rut(ListaVendedores &lista);
+	void menuPrincipal(ListaVendedores &vendedores);
 #endif

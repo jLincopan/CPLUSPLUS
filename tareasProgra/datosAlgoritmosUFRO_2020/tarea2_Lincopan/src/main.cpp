@@ -8,12 +8,6 @@ int main() {
 
     ListaVendedores vendedores;
 
-	registrarVendedor(vendedores);
-	registrarVendedor(vendedores);
-	registrarVendedor(vendedores);
-    imprimeLista_vendedores(vendedores);
-    
-    eliminarVendedor_rut(vendedores);
-    imprimeLista_vendedores(vendedores);
+    menuPrincipal(vendedores);
     return 0;
 }

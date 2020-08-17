@@ -179,3 +179,53 @@ int calcularCobro_vendedor(int id, ListaVendedores lista) {
 
     return total;
 }
+
+void buscarVendedor_rut(ListaVendedores lista) {
+    Vendedor tmp;
+    int largo = largoLista_vendedores(lista);
+    char rutObjetivo[10] = {0};
+    char rutBuffer[10] = {0};
+
+    printf("\nIngrese el rut a buscar (sin dígito verificador:\n");
+    leerLinea_texto(sizeof(rutObjetivo), rutObjetivo);
+
+    for(int i = 1; i < largo; i++) {
+        tmp = obtenerVendedor_lista(i, lista);
+        strncpy(rutBuffer, tmp.rut, sizeof(rutBuffer));
+
+        if(strcmp(rutObjetivo, rutBuffer) == 0) {
+            printf("RUT encotrado, ID vendedor: %i\n", i);
+            return;
+        }
+    }
+    printf("\nRut no encontrado\n");    
+}
+
+void buscarCliente_rut(ListaVendedores lista) {
+    Vendedor vendedor_tmp;
+    Cliente cliente_tmp;
+
+    int largoVendedores = largoLista_vendedores(lista);
+    int largoClientes;
+    char rutObjetivo[10] = {0};
+    char rutBuffer[10] = {0};
+
+    printf("\nIngrese el rut a buscar (sin dígito verificador:\n");
+    leerLinea_texto(sizeof(rutObjetivo), rutObjetivo);
+
+    for(int contadorVendedores = 1; contadorVendedores < largoVendedores; contadorVendedores++) {
+        vendedor_tmp = obtenerVendedor_lista(contadorVendedores, lista);
+        largoClientes = largoLista_clientes(vendedor_tmp.clientes);
+
+        for(int contadorClientes = 1; contadorClientes < largoClientes; contadorClientes++) {
+            cliente_tmp = obtenerCliente_lista(contadorClientes, vendedor_tmp.clientes);
+            strncpy(rutBuffer, cliente_tmp.rut, sizeof(rutBuffer));
+
+            if(strcmp(rutObjetivo, rutBuffer) == 0) {
+                printf("RUT encotrado, ID vendedor: %i, ID cliente: %i\n", contadorVendedores, contadorClientes);
+                return;
+            }
+        }
+    }
+    printf("\nRut no encontrado\n");    
+}

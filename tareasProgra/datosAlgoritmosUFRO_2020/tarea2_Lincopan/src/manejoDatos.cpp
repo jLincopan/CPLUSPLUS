@@ -105,7 +105,6 @@ void registrarCliente(ListaVendedores &lista) {
     }
     
     Cliente buffer = {0};
-    Vendedor vendedor_tmp;
     int idVendedor;
 
     while(1) {
@@ -114,6 +113,8 @@ void registrarCliente(ListaVendedores &lista) {
         idVendedor = leerInt();
 
         if(idVendedor <= largoLista_vendedores(lista) && idVendedor > 0) {
+            limpiarPantalla();
+            getchar();
             break;
         } else {
             limpiarPantalla();
@@ -121,7 +122,12 @@ void registrarCliente(ListaVendedores &lista) {
         }
     }
 
-    vendedor_tmp = obtenerVendedor_lista(idVendedor, lista);
+    nodo* aux = lista.primero;
+	for(int i=1;i<idVendedor;i++) {
+		aux=aux->next;
+	}
+    Vendedor* vendedor_tmp = &aux->dato;
+    
     printf("Ingrese los datos del cliente:\n\n");
 
     printf("ingrese su nombre:\n");
@@ -154,7 +160,7 @@ void registrarCliente(ListaVendedores &lista) {
     printf("Ingrese la fecha de cobro:\n");
     leerLinea_texto(sizeof(buffer.fechaCobro), buffer.fechaCobro);
 
-    insertarUltimo_listaClientes(buffer, vendedor_tmp.clientes);
+    insertarUltimo_listaClientes(buffer, vendedor_tmp->clientes);
     limpiarPantalla();
     printf("\nCliente insertado\n");
 }
@@ -176,16 +182,17 @@ void mostrarDatos_clientes(ListaVendedores &vendedores) {
 
     int idVendedor = 0;
     int largoLista = 0;
-    while(1) {
 
+    while(1) {
         if(listaVendedores_vacia(vendedores)) {
             limpiarPantalla();
             printf("Error en función mostrarDatos_clientes: no hay vendedores registrados\n");
             return;
         }
 
-        printf("\nIngrese la id del vendedor asociado al cliente\n");
+        printf("\nVendedores registrados actualmente: \n");
         imprimeLista_vendedores(vendedores);
+        printf("\nIngrese la id del vendedor para mostrar sus clientes registrados\n");
 
         idVendedor = leerInt();
         largoLista = largoLista_vendedores(vendedores);
@@ -202,6 +209,11 @@ void mostrarDatos_clientes(ListaVendedores &vendedores) {
     tmp = obtenerVendedor_lista(idVendedor, vendedores);
     limpiarPantalla();
 
+    if(listaClientes_vacia(tmp.clientes)) {
+        limpiarPantalla();
+        printf("Error en función mostrarDatos_clientes: no hay clientes registrados\n");
+        return;
+    }
     printf("\n\nDatos de los clientes:\n");
     imprimeLista_clientes(tmp);
 }

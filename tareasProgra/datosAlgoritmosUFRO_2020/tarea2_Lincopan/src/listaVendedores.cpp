@@ -62,17 +62,6 @@ void eliminarLista(ListaVendedores &lista){
 		eliminarDato_listaVendedores(primerElemento_lista(lista),lista);
 }
 
-/*
-int localizarDato_lista(tipoDato x, Lista lista){
-	for(int i=primerElemento_lista(lista);i<largoLista(lista);i=avanzarLista(i,lista)) {
-		if(obtenerDato_lista(i,lista)==x) {
-			return i;
-		}
-	}
-	return largoLista(lista);
-}
-*/
-
 void eliminarDato_listaVendedores(int p, ListaVendedores &lista){
 	nodo* aux = lista.primero;
 	if(primerElemento_lista(lista)==p) {

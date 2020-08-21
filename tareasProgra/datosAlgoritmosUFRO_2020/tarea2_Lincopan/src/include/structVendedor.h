@@ -22,7 +22,6 @@
 	};
 
 	struct cabeceraVendedor{
-		int largo;
 		nodoVendedor* primero; 
 	};  
 #endif

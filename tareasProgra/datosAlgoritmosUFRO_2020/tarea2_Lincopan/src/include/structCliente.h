@@ -19,7 +19,6 @@
 	};
 
 	struct cabeceraCliente{
-		int largo=0;
 		nodoCliente* primero;
 	};
 #endif

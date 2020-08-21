@@ -46,17 +46,6 @@ void eliminarListaClientes(ListaClientes &lista){
 		eliminarDato_listaClientes(primerElemento_lista(lista),lista);
 }
 
-/*
-int localizarDato_lista(tipoDato x, Lista lista){
-	for(int i=primerElemento_lista(lista);i<largoLista(lista);i=avanzarLista(i,lista)) {
-		if(obtenerDato_lista(i,lista)==x) {
-			return i;
-		}
-	}
-	return largoLista(lista);
-}
-*/
-
 tipoDato2 obtenerCliente_lista(int p, ListaClientes lista){
 	nodo2* aux = lista.primero;
 	for(int i=1;i<p;i++) {

@@ -20,10 +20,6 @@ int largoLista_vendedores(ListaVendedores lista){
 	return c;
 }
 
-static int avanzarLista(int p, ListaVendedores lista){
-	return p+1;
-}
-
 static void insertarDato_lista(tipoDato x, int p, ListaVendedores &lista){
 	nodo* nuevo= new nodo(x);
 	nodo* aux = lista.primero;
@@ -44,6 +40,18 @@ tipoDato obtenerVendedor_lista(int p, ListaVendedores lista){
 		aux=aux->next;
 	}
 	return aux->dato;
+}
+
+tipoDato siguienteVendedor(int idActual, ListaVendedores lista) {
+	nodo* aux = lista.primero;
+	for(int i=1;i<idActual+1;i++) {
+		aux=aux->next;
+	}
+	return aux->dato;
+}
+
+static int avanzarLista(int p, ListaVendedores lista){
+	return p+1;
 }
 
 void imprimeLista_vendedores(ListaVendedores lista){

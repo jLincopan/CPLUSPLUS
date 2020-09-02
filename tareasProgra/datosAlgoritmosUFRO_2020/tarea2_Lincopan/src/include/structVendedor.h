@@ -4,20 +4,20 @@
     #include "structCliente.h"
     #include "listaStructClientes.h"
 	struct Vendedor{
-		long cuenta;
-		char nombre[15];
-		char apellido[15];
-		char rut[10];
-		long telefono;
-		char direccion[50];
-		int edad;
-		char profesion[30];
-		long deuda;
+		long cuenta = 0;
+		char nombre[15] = {0};
+		char apellido[15] = {0};
+		char rut[10] = {0};
+		long telefono = 0;
+		char direccion[50] = {0};
+		int edad = 0;
+		char profesion[30] = {0};
+		long deuda = 0;
 		ListaClientes clientes;
 	};
 	
 	struct nodoVendedor{
-		Vendedor dato;
+		Vendedor dato = {0};
 		nodoVendedor* sgte;
 	};
 

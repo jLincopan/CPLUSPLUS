@@ -1,20 +1,19 @@
 #ifndef STRUCT_CLIENTE_H
     #define STRUCT_CLIENTE_H
     struct Cliente{
-		int id = 0;
-		char nombre[15];
-		char apellido[15];
-		char rut[10];
-		long telefono;
-		char direccion[50];
-		int edad;
-		char profesion[30];
-		long deuda;
-		char fechaCobro[11];
+		char nombre[15] = {0};
+		char apellido[15] = {0};
+		char rut[10] = {0};
+		long telefono = 0;
+		char direccion[50] = {0};
+		int edad = 0;
+		char profesion[30] = {0};
+		long deuda = 0;
+		char fechaCobro[11] = {0};
 	};
 
 	struct nodoCliente{
-		Cliente dato;
+		Cliente dato = {0};
 		nodoCliente* sgte;
 	};
 

@@ -29,6 +29,7 @@ static int avanzarLista(int p, ListaClientes lista){
 
 static void insertarDato_lista(tipoDato2 x, int p, ListaClientes &lista){
 	nodo2* nuevo= new nodo2(x);
+	//nuevo->dato = {0};
 	nodo2* aux = lista.primero;
 	if(primerElemento_lista(lista)==p){
 		nuevo->next=lista.primero;

@@ -10,8 +10,8 @@ void limpiarPantalla(){
 }
 
 long leerLong() {
-    long a;
-    long rc;
+    long a = 0;
+    long rc = 0;
     while ((rc = scanf("%li", &a)) == 0) { // Neither success (1) nor EOF
 
         scanf("%*[^\n]");
@@ -20,8 +20,8 @@ long leerLong() {
 }
 
 int leerInt() {
-    int a;
-    int rc;
+    int a = 0;
+    int rc = 0;
     while ((rc = scanf("%d", &a)) == 0){  // Neither success (1) nor EOF
         // clear what is left, the * means only match and discard:
         scanf("%*[^\n]");
@@ -34,7 +34,6 @@ int leerInt() {
 void leerLinea_texto(size_t largo, char buffer[]) {
 
     char tmp[largo];
-    
     while (1) {
         if (fgets(tmp, largo, stdin)) {
             tmp[strcspn(tmp, "\n")] = 0;
@@ -49,7 +48,7 @@ void leerLinea_texto(size_t largo, char buffer[]) {
 }
 
 void registrarVendedor(ListaVendedores &lista) {
-    Vendedor tmp;
+    Vendedor tmp = {0};
     printf("Ingrese los datos del vendedor:\n\n");
 
     printf("Ingrese el número de cuenta bancaria: \n");

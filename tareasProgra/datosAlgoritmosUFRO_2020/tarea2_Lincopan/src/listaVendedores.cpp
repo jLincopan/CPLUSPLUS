@@ -58,7 +58,15 @@ void imprimeLista_vendedores(ListaVendedores lista){
 	Vendedor tmp;
 	for(int i=primerElemento_lista(lista);i<largoLista_vendedores(lista);i=avanzarLista(i,lista)){
 		tmp = obtenerVendedor_lista(i, lista);
-		printf("\n\n[ID: %d]\n",i);
+		printf("\n\n| ID: %d |",i);
+		printf(" Nombre |");
+    	printf(" Apellido |");
+    	printf(" RUT |");
+    	printf(" N° de teléfono |");  
+    	printf(" Dirección |");
+    	printf(" Cuenta bancaria |");
+		printf(" Edad | ");
+    	printf(" Profesión: |\n");
 		mostrarDatos_vendedor(tmp);
 	}
 	printf("\n");

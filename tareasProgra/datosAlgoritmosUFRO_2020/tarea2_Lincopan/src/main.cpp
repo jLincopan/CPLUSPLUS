@@ -7,15 +7,11 @@
 
 int main() {
 
-    ListaVendedores vendedores;
-    ListaVendedores tmp;
+    ListaVendedores listaPrincipal;
 
-    registrarVendedor(vendedores);
-    registrarCliente(vendedores);
+    extraerListaVendedores_binario(listaPrincipal);
 
-    //escribirDato_binario(vendedores); si descomento esa linea todo funciona... ¿Por qué?
-    
-    extraerListaVendedores_binario(tmp);
-    mostrarDatos_clientes(tmp);
+    menuPrincipal(listaPrincipal);
+    escribirDato_binario(listaPrincipal);
     return 0;
 }

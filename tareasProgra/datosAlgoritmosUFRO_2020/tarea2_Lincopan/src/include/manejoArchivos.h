@@ -8,5 +8,6 @@
     void extraerVendedor_binario(Vendedor &buffer, int idVendedor);
     void extraerListaVendedores_binario(ListaVendedores &lista);
     void escribirDato_binario(ListaVendedores datos);
+     void prueba(ListaVendedores &lista);
 
 #endif    

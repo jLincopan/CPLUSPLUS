@@ -84,15 +84,14 @@ void registrarVendedor(ListaVendedores &lista) {
 }
 
 void mostrarDatos_vendedor(Vendedor vendedor) {
-    printf("Datos del vendedor:\n\n");
-    printf("Nombre: %s\n", vendedor.nombre);
-    printf("Apellido: %s\n", vendedor.apellido);
-    printf("RUT: %s\n", vendedor.rut);
-    printf("N° de teléfono: %li\n", vendedor.telefono);  
-    printf("Dirección: %s\n", vendedor.direccion);
-    printf("Cuenta bancaria: %li\n", vendedor.cuenta);
-	printf("Edad: %i\n", vendedor.edad);
-    printf("Profesión: %s\n", vendedor.profesion);
+    printf("          |%s |", vendedor.nombre);
+    printf(" | %s |", vendedor.apellido);
+    printf(" | %s |", vendedor.rut);
+    printf(" | %li |", vendedor.telefono);  
+    printf(" | %s |", vendedor.direccion);
+    printf(" | %li |", vendedor.cuenta);
+	printf(" | %i |", vendedor.edad);
+    printf(" | %s |", vendedor.profesion);
 }
 
 void registrarCliente(ListaVendedores &lista) {
@@ -335,9 +334,9 @@ void eliminarVendedor_rut(ListaVendedores &lista) {
 void menuPrincipal(ListaVendedores &vendedores) {
 
     int opcion = 0;
-    limpiarPantalla();
 
     while(1) {
+        limpiarPantalla();
         printf("\n\n1) Registrar nuevo vendedor\n");
         printf("\n2) Registrar nuevo cliente\n");
         printf("\n3) Buscar vendedor por rut\n");
@@ -384,4 +383,5 @@ void menuPrincipal(ListaVendedores &vendedores) {
             break;
         }
     }
+    
 }

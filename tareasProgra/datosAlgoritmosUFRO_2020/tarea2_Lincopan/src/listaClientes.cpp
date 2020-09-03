@@ -73,12 +73,21 @@ void eliminarDato_listaClientes(int p, ListaClientes &lista){
 void imprimeLista_clientes(Vendedor &vendedor){
 	ListaClientes lista = vendedor.clientes;
 	Cliente tmp;
+	printf("__________| Nombre         |" );
+    printf(" Apellido       |");
+    printf(" RUT      |");
+    printf(" Teléfono |");  
+    printf(" Dirección           |");
+	printf(" Edad |");
+    printf(" Profesión:           |");
+    printf(" Deuda   |");
+    printf(" Fecha de cobro |\n");
 	for(int i=primerElemento_lista(lista);i<largoLista_clientes(lista);i=avanzarLista(i,lista)){
 		tmp = obtenerCliente_lista(i, lista);
-		printf("\n[ID: %d]\n",i);
+		printf("| ID: %d  ",i);
 		mostrarDatos_cliente(tmp);
 	}
-	printf("\n");
+	printf("¯¯¯¯¯¯¯¯¯¯¯\n");
 }
 
 //añade un nuevo dato inmediatamente después del último elemento de la lista

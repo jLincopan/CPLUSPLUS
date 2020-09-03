@@ -56,20 +56,20 @@ static int avanzarLista(int p, ListaVendedores lista){
 
 void imprimeLista_vendedores(ListaVendedores lista){
 	Vendedor tmp;
+		printf("__________| Nombre         |");
+    	printf(" Apellido       |");
+    	printf(" RUT      |");
+    	printf(" Teléfono |");  
+    	printf(" Dirección           |");
+    	printf(" Cuenta banco |");
+		printf(" Edad |");
+    	printf(" Profesión:          |");
 	for(int i=primerElemento_lista(lista);i<largoLista_vendedores(lista);i=avanzarLista(i,lista)){
 		tmp = obtenerVendedor_lista(i, lista);
-		printf("\n\n| ID: %d |",i);
-		printf(" Nombre |");
-    	printf(" Apellido |");
-    	printf(" RUT |");
-    	printf(" N° de teléfono |");  
-    	printf(" Dirección |");
-    	printf(" Cuenta bancaria |");
-		printf(" Edad | ");
-    	printf(" Profesión: |\n");
+		printf("\n| ID: %d  ",i);
 		mostrarDatos_vendedor(tmp);
 	}
-	printf("\n");
+	printf("\n¯¯¯¯¯¯¯¯¯¯¯\n");
 }
 
 

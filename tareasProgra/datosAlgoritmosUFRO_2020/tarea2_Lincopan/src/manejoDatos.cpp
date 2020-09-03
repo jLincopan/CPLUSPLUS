@@ -84,14 +84,14 @@ void registrarVendedor(ListaVendedores &lista) {
 }
 
 void mostrarDatos_vendedor(Vendedor vendedor) {
-    printf("          |%s |", vendedor.nombre);
-    printf(" | %s |", vendedor.apellido);
-    printf(" | %s |", vendedor.rut);
-    printf(" | %li |", vendedor.telefono);  
-    printf(" | %s |", vendedor.direccion);
-    printf(" | %li |", vendedor.cuenta);
-	printf(" | %i |", vendedor.edad);
-    printf(" | %s |", vendedor.profesion);
+    printf(" | %-13s ", vendedor.nombre);
+    printf(" | %-13s ", vendedor.apellido);
+    printf(" | %-7s ", vendedor.rut);
+    printf(" | %-7li ", vendedor.telefono);  
+    printf(" | %-18s ", vendedor.direccion);
+    printf(" | %-11li ", vendedor.cuenta);
+	printf(" | %-3i ", vendedor.edad);
+    printf(" | %-19s |", vendedor.profesion);
 }
 
 void registrarCliente(ListaVendedores &lista) {
@@ -165,15 +165,15 @@ void registrarCliente(ListaVendedores &lista) {
 
 void mostrarDatos_cliente(Cliente cliente) {
     
-    printf("Nombre: %s\n", cliente.nombre);
-    printf("Apellido: %s\n", cliente.apellido);
-    printf("RUT: %s\n", cliente.rut);
-    printf("N° de teléfono: %li\n", cliente.telefono);  
-    printf("Dirección: %s\n", cliente.direccion);
-	printf("Edad: %i\n", cliente.edad);
-    printf("Profesión: %s\n", cliente.profesion);
-    printf("Deuda: %li\n", cliente.deuda);
-    printf("Fecha de cobro: %s\n", cliente.fechaCobro);
+    printf(" | %-13s ", cliente.nombre);
+    printf(" | %-13s ", cliente.apellido);
+    printf(" | %-7s ", cliente.rut);
+    printf(" | %-7li ", cliente.telefono);  
+    printf(" | %-18s ", cliente.direccion);
+	printf(" | %-3i ", cliente.edad);
+    printf(" | %-19s ", cliente.profesion);
+    printf(" | %-7li", cliente.deuda);
+    printf(" | %-14s |\n", cliente.fechaCobro);
 }
 
 void mostrarDatos_clientes(ListaVendedores &vendedores) {
@@ -214,7 +214,13 @@ void mostrarDatos_clientes(ListaVendedores &vendedores) {
     }
     printf("\n\nDatos de los clientes:\n");
     imprimeLista_clientes(tmp);
+    printf("\nPresione cualquier tecla para continuar\n\n");
+    fflush(stdin);
+
+    while ( getchar() != '\n' ); //vaciamos stdin
+    getchar(); //pausa, esperando cualquier tecla
 }
+
 
 int calcularCobro_vendedor(ListaVendedores lista) {
 
@@ -336,7 +342,6 @@ void menuPrincipal(ListaVendedores &vendedores) {
     int opcion = 0;
 
     while(1) {
-        limpiarPantalla();
         printf("\n\n1) Registrar nuevo vendedor\n");
         printf("\n2) Registrar nuevo cliente\n");
         printf("\n3) Buscar vendedor por rut\n");

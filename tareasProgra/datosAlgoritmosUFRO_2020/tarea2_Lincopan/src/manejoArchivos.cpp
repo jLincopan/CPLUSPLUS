@@ -29,30 +29,6 @@ void extraerVendedor_binario(Vendedor &buffer, int idVendedor) {
 
 }
 
-void prueba(ListaVendedores &lista) {
-    FILE* archivo_fuente = fopen("datos/ventas.bin", "rb");
-    if(archivo_fuente == NULL) {
-        printf("Error, no se pudo abrir el archivo que contiene los datos\n\n");
-        exit(EXIT_FAILURE);
-    }
-    
-    char finVendedor[] = "FIN_VENDEDOR";
-    char comparar[sizeof(finVendedor)];
-    Vendedor vendedor_tmp = {0};
-    Cliente cliente_tmp = {0};
-    
-    fread(&vendedor_tmp, 1, sizeof(Vendedor), archivo_fuente);
-    vendedor_tmp.clientes.primero = new nodo2;
-
-    printf("\nVendedor cargado en memoria\n\n");
-
-    insertarUltimo_listaVendedores(vendedor_tmp, lista);
-    insertarUltimo_listaClientes(cliente_tmp, lista.primero->dato.clientes);
-
-    fclose(archivo_fuente);
-
-}
-
 void extraerListaVendedores_binario(ListaVendedores &lista) {
     FILE* archivo_fuente = fopen("datos/ventas.bin", "rb");
     if(archivo_fuente == NULL) {
@@ -88,7 +64,7 @@ void extraerListaVendedores_binario(ListaVendedores &lista) {
                     insertarUltimo_listaVendedores(vendedor_tmp, lista);
                     contadorClientes++;
                     
-                    printf("Vendedor cargado: %s, %i clientes encontrados\n", vendedor_tmp.nombre, contadorClientes);
+                    printf("Vendedor cargado: %s, %i cliente(s) encontrado(s)\n", vendedor_tmp.nombre, contadorClientes);
 
                     break;
                 } else {
@@ -97,6 +73,7 @@ void extraerListaVendedores_binario(ListaVendedores &lista) {
                     cliente_tmp = {0};
                     fseek(archivo_fuente, -sizeof(finVendedor), SEEK_CUR);
                 }
+                
             }
 
         }

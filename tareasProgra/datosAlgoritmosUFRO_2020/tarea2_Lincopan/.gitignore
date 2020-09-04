@@ -50,3 +50,9 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+
+#archivos que no deseo que se suban:
+
+tdaEjecutable
+*.bin

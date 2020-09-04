@@ -8,10 +8,10 @@ _OBJS = listaClientes.o listaVendedores.o main.o manejoPantalla.o manejoArchivos
 OBJS = $(patsubst %,$(ODIR)/%,$(_OBJS))
 
 $(ODIR)/%.o: $(SDIR)/%.cpp 
-	$(CC) -Wall -g -fsanitize=address -c $(INC) -o $@ $< $(CFLAGS) 
+	$(CC) -Wall -c $(INC) -o $@ $< $(CFLAGS) 
 
 $(OUT): $(OBJS) 
-	$(CC) -Wall -g -fsanitize=address $^ -o $(OUT)
+	$(CC) -Wall $^ -o $(OUT)
 
 .PHONY: clean
 

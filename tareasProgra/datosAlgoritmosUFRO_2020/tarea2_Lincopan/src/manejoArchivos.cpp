@@ -44,7 +44,7 @@ void extraerListaVendedores_binario(ListaVendedores &lista) {
 
     printf("Leyendo datos desde ""ventas.bin""\n\n");
     while(fread(&vendedor_tmp, 1, sizeof(Vendedor), archivo_fuente) == sizeof(Vendedor)) {
-
+        vendedor_tmp.clientes.primero = NULL;
         fread(&comparar, 1, sizeof(finVendedor), archivo_fuente);
         
 
@@ -55,11 +55,10 @@ void extraerListaVendedores_binario(ListaVendedores &lista) {
             fseek(archivo_fuente, -sizeof(finVendedor), SEEK_CUR);
 
             while(fread(&cliente_tmp, 1, sizeof(Cliente), archivo_fuente) == sizeof(Cliente)) {
-
                 fread(&comparar, 1, sizeof(finVendedor), archivo_fuente);
 
                 if(strcmp(comparar, finVendedor) == 0) {
-                    vendedor_tmp.clientes.primero = new nodo2;
+                    
                     insertarUltimo_listaClientes(cliente_tmp, vendedor_tmp.clientes);
                     insertarUltimo_listaVendedores(vendedor_tmp, lista);
                     contadorClientes++;
@@ -68,7 +67,7 @@ void extraerListaVendedores_binario(ListaVendedores &lista) {
 
                     break;
                 } else {
-                    vendedor_tmp.clientes.primero = new nodo2;
+                    contadorClientes++;
                     insertarUltimo_listaClientes(cliente_tmp, vendedor_tmp.clientes);
                     cliente_tmp = {0};
                     fseek(archivo_fuente, -sizeof(finVendedor), SEEK_CUR);

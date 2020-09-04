@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+#include "include/manejoPantalla.h"
 #include "include/manejoDatos.h"
 #include "include/listaClientes.h"
 #include "include/listaStructClientes.h"

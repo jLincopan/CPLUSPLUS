@@ -5,6 +5,8 @@
 #include "include/listaVendedores.h"
 #include "include/listaClientes.h"
 
+extern bool modificacion;
+
 long leerLong() {
     long a = 0;
     long rc = 0;
@@ -77,14 +79,15 @@ void registrarVendedor(ListaVendedores &lista) {
     insertarUltimo_listaVendedores(tmp, lista);
     limpiarPantalla();
     printf("Vendedor insertado\n");
+    modificacion = true;
 }
 
 void registrarCliente(ListaVendedores &lista) {
 
     if(listaVendedores_vacia(lista)) {
-            limpiarPantalla();
-            printf("Error en función mostrarDatos_clientes: no hay vendedores registrados\n");
-            return;
+        limpiarPantalla();
+        printf("Error en función mostrarDatos_clientes: no hay vendedores registrados\n");
+        return;
     }
     
     Cliente buffer = {0};
@@ -146,6 +149,8 @@ void registrarCliente(ListaVendedores &lista) {
     insertarUltimo_listaClientes(buffer, vendedor_tmp->clientes);
     limpiarPantalla();
     printf("\nCliente insertado\n");
+
+    modificacion = true;
 }
 
 int calcularCobro_vendedor(ListaVendedores lista) {
@@ -163,7 +168,7 @@ int calcularCobro_vendedor(ListaVendedores lista) {
     while(1) {
         
         imprimeLista_vendedores(lista);
-        printf("\nIngrese la id del vendedor asociado al cliente\n");
+        printf("\nIngrese la id del vendedor:\n");
 
         idVendedor = leerInt();
         largoLista = largoLista_vendedores(lista);
@@ -177,14 +182,24 @@ int calcularCobro_vendedor(ListaVendedores lista) {
     }
 
     Vendedor vendedor = obtenerVendedor_lista(idVendedor, lista);
-    int total = 0;
 
-    for(int i = 1; i < largoLista; i++) {
-        tmp = obtenerCliente_lista(i, vendedor.clientes);
-        total = total + tmp.deuda;
+    if(listaClientes_vacia(vendedor.clientes)) {
+        printf("Error, el vendedor seleccionado no tiene clientes registrados\n");
+        pausa();
+        return 0;
+    } else {
+        int total = 0;
+
+        for(int i = 1; i < largoLista; i++) {
+            tmp = obtenerCliente_lista(i, vendedor.clientes);
+            total = total + tmp.deuda;
+        }
+        
+        printf("Total a cobrar: %i", total);
+        pausa();
+        limpiarPantalla();
+        return total; //por si alguna otra función necesita el dato
     }
-    printf("Total a cobrar: %i", total);
-    return total; //por si alguna otra función necesita el dato
 }
 
 int buscarVendedor_rut(ListaVendedores lista) {
@@ -257,8 +272,9 @@ void buscarCliente_rut(ListaVendedores lista) {
 }
 
 void eliminarVendedor_rut(ListaVendedores &lista) {
-
     int id = buscarVendedor_rut(lista);
     eliminarDato_listaVendedores(id, lista);
     printf("\nVendedor eliminado\n"); 
+    
+    modificacion = true;
 }

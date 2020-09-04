@@ -7,13 +7,20 @@
 #include "include/manejoArchivos.h"
 #include "include/manejoPantalla.h"
 
+bool modificacion = false;
+
 int main() {
 
     ListaVendedores listaPrincipal;
 
+    limpiarPantalla();
     extraerListaVendedores_binario(listaPrincipal);
 
     menuPrincipal(listaPrincipal);
-    escribirDato_binario(listaPrincipal);
+
+    if(modificacion) {
+        escribirListaVendedores_binario(listaPrincipal);
+    }
+
     return 0;
 }

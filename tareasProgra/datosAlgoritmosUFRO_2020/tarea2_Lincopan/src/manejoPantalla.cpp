@@ -9,7 +9,7 @@ void pausa() {
     getchar(); //pausa, esperando cualquier tecla
 }
 
-void limpiarPantalla() {
+void limpiarPantalla() { //solo funciona en sistemas tipo UNIX
     printf("\e[2J\e[H");
 }
 
@@ -76,7 +76,8 @@ void mostrarDatos_clientes(ListaVendedores &vendedores) {
     printf("\n\nDatos de los clientes:\n");
     imprimeLista_clientes(tmp);
     printf("\nPresione cualquier tecla para continuar\n\n");
-    fflush(stdin);
+    pausa();
+    limpiarPantalla();
  
 }
 

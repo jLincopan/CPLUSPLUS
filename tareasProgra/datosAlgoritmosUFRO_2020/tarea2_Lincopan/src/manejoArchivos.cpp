@@ -2,62 +2,38 @@
 #include "include/manejoArchivos.h"
 #include "include/listaVendedores.h"
 
-void extraerVendedor_binario(Vendedor &buffer, int idVendedor) {
-
-    char finVendedor[13] = "FIN_VENDEDOR";
-    char comparar[sizeof(finVendedor)];
-    FILE* archivo_fuente = fopen("datos/ventas.bin", "rb");
-    Cliente cliente_tmp = {0};
-
-    if(archivo_fuente == NULL) {
-        printf("Error, no se pudo abrir el archivo que contiene los datos\n\n");
-        exit(EXIT_FAILURE);
-    }
-
-    buffer = {0};
-    fseek(archivo_fuente, (idVendedor-1)*(sizeof(Vendedor)), SEEK_SET);
-    fread(&buffer, sizeof(Vendedor), 1, archivo_fuente);
-    fread(&comparar, sizeof(finVendedor), 1, archivo_fuente);
-
-    while(strcmp(finVendedor, comparar) == 0) {
-
-        fread(&cliente_tmp, sizeof(Cliente), 1, archivo_fuente);
-        insertarUltimo_listaClientes(cliente_tmp, buffer.clientes);
-        fread(&comparar, sizeof(finVendedor), 1, archivo_fuente);
-    }
-    fclose(archivo_fuente);
-
-}
-
 void extraerListaVendedores_binario(ListaVendedores &lista) {
     FILE* archivo_fuente = fopen("datos/ventas.bin", "rb");
     if(archivo_fuente == NULL) {
-        printf("Archivo ventas.bin no encontrado... Iniciando desde cero\n\n");
+        printf("Archivo %s no encontrado... Iniciando desde cero\n\n", RUTA_DATOS);
         return;
     }
 
-    int contadorClientes = 0;    
-    char finVendedor[] = "FIN_VENDEDOR";
-    char comparar[sizeof(finVendedor)];
+    int contadorClientes = 0;
+    int vendedores = 0;
+    int clientes = 0;
+
+    char comparar[sizeof(FIN_VENDEDOR)];
     Vendedor vendedor_tmp = {0};
     Cliente cliente_tmp = {0};
 
-    printf("Leyendo datos desde ""ventas.bin""\n\n");
+    printf("Leyendo datos desde ""%s""\n\n", RUTA_DATOS);
     while(fread(&vendedor_tmp, 1, sizeof(Vendedor), archivo_fuente) == sizeof(Vendedor)) {
         vendedor_tmp.clientes.primero = NULL;
-        fread(&comparar, 1, sizeof(finVendedor), archivo_fuente);
+        fread(&comparar, 1, sizeof(FIN_VENDEDOR), archivo_fuente);
         
 
-        if(strcmp(comparar, finVendedor) == 0) {
+        if(strcmp(comparar, FIN_VENDEDOR) == 0) {
             insertarUltimo_listaVendedores(vendedor_tmp, lista);
+            printf("Vendedor cargado: %s, %i cliente(s) encontrado(s)\n", vendedor_tmp.nombre, contadorClientes);
             vendedor_tmp = {0};
         } else {
-            fseek(archivo_fuente, -sizeof(finVendedor), SEEK_CUR);
+            fseek(archivo_fuente, -sizeof(FIN_VENDEDOR), SEEK_CUR);
 
             while(fread(&cliente_tmp, 1, sizeof(Cliente), archivo_fuente) == sizeof(Cliente)) {
-                fread(&comparar, 1, sizeof(finVendedor), archivo_fuente);
+                fread(&comparar, 1, sizeof(FIN_VENDEDOR), archivo_fuente);
 
-                if(strcmp(comparar, finVendedor) == 0) {
+                if(strcmp(comparar, FIN_VENDEDOR) == 0) {
                     
                     insertarUltimo_listaClientes(cliente_tmp, vendedor_tmp.clientes);
                     insertarUltimo_listaVendedores(vendedor_tmp, lista);
@@ -67,26 +43,28 @@ void extraerListaVendedores_binario(ListaVendedores &lista) {
 
                     break;
                 } else {
-                    contadorClientes++;
                     insertarUltimo_listaClientes(cliente_tmp, vendedor_tmp.clientes);
+                    contadorClientes++;
                     cliente_tmp = {0};
-                    fseek(archivo_fuente, -sizeof(finVendedor), SEEK_CUR);
+                    fseek(archivo_fuente, -sizeof(FIN_VENDEDOR), SEEK_CUR);
                 }
                 
             }
+            clientes = contadorClientes + clientes;
+            contadorClientes = 0;
 
         }
-        printf("\nArchivo leido\n\n");
+        vendedores++;
     }
 
+    printf("\nArchivo leído: %i vendedores y %i clientes cargados\n\n", vendedores, clientes);
     fclose(archivo_fuente);
 }
 
-void escribirDato_binario(ListaVendedores datos) {
+void escribirListaVendedores_binario(ListaVendedores datos) {
     FILE* archivo_fuente = fopen("datos/ventas.bin", "wb");
     Vendedor bufferVendedores = {0};
     Cliente bufferClientes = {0};
-    char finCliente[] = "FIN_VENDEDOR";
 
     for(int i = 1; i < largoLista_vendedores(datos); i++) {
 
@@ -99,7 +77,7 @@ void escribirDato_binario(ListaVendedores datos) {
             fwrite(&bufferClientes, sizeof(Cliente), 1, archivo_fuente);
             bufferClientes = {0};
         }
-        fwrite(finCliente, sizeof(finCliente), 1, archivo_fuente);
+        fwrite(FIN_VENDEDOR, sizeof(FIN_VENDEDOR), 1, archivo_fuente);
         bufferVendedores = {0};
     }
 

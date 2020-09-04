@@ -5,29 +5,58 @@
 #include "include/listaVendedores.h"
 #include "include/listaClientes.h"
 
-extern bool modificacion;
+extern bool modificacion; //variable que indica si se ha modificado
+                          //la lista principal de vendedores
+
+
+/*
+	Nombre de la función: leerLong
+	Tipo de función: long
+	Parámetros: ninguno
+	Dato de retorno: a, de tipo long
+	Descripción de la función: lee un valor, se asegura de que no sea un caracter y 
+                               lo devuelve
+*/
 
 long leerLong() {
     long a = 0;
     long rc = 0;
-    while ((rc = scanf("%li", &a)) == 0) { // Neither success (1) nor EOF
+    while ((rc = scanf("%li", &a)) == 0) {
 
         scanf("%*[^\n]");
-    }
-    return a;
-}
-
-int leerInt() {
-    int a = 0;
-    int rc = 0;
-    while ((rc = scanf("%d", &a)) == 0){  // Neither success (1) nor EOF
-        // clear what is left, the * means only match and discard:
-        scanf("%*[^\n]");
-        // input was not a number, ask again:
         printf("Dato no válido, ingrese el número de nuevo:\n");
     }
     return a;
 }
+
+/*
+	Nombre de la función: leerInt
+	Tipo de función: long
+	Parámetros: ninguno
+	Dato de retorno: a, de tipo int
+	Descripción de la función: lee un valor, se asegura de que no sea un caracter y 
+                               lo devuelve
+*/
+
+int leerInt() {
+    int a = 0;
+    int rc = 0;
+    while ((rc = scanf("%d", &a)) == 0){
+        scanf("%*[^\n]");
+        printf("Dato no válido, ingrese el número de nuevo:\n");
+    }
+    return a;
+}
+
+/*
+	Nombre de la función: leerLinea_texto
+	Tipo de función: void
+	Parámetros: largo, de tipo size_t
+                buffer, de tipo char[]
+	Dato de retorno: ninguno
+	Descripción de la función: Lee una linea de texto de largo predefinido,
+                               y la guarda en el buffer recibido como parámetro
+*/
 
 void leerLinea_texto(size_t largo, char buffer[]) {
 
@@ -44,6 +73,15 @@ void leerLinea_texto(size_t largo, char buffer[]) {
 
     strncpy(buffer, tmp, largo);
 }
+
+/*
+	Nombre de la función: registrarVendedor
+	Tipo de función: void
+	Parámetros: lista, de tipo &ListaVendedores
+	Dato de retorno: ninguno
+	Descripción de la función: registra un vendedor en la lista
+                               recibida como parámetro
+*/
 
 void registrarVendedor(ListaVendedores &lista) {
     Vendedor tmp = {0};
@@ -69,8 +107,15 @@ void registrarVendedor(ListaVendedores &lista) {
     printf("ingrese su dirección:\n");
     leerLinea_texto(sizeof(tmp.direccion), tmp.direccion);
 
-    printf("ingrese su edad:\n");
-    tmp.edad = leerInt();
+    while(1) {
+        printf("ingrese su edad:\n");
+        tmp.edad = leerInt();
+        if(tmp.edad > 0 && tmp.edad < 120) {
+            break;
+        } else {
+            printf("\nLa edad ingresada no es válida, inténtelo nuevamente\n");
+        }
+    }   
 
     getchar();
     printf("ingrese su profesión:\n");
@@ -81,6 +126,15 @@ void registrarVendedor(ListaVendedores &lista) {
     printf("Vendedor insertado\n");
     modificacion = true;
 }
+
+/*
+	Nombre de la función: registrarCliente
+	Tipo de función: void
+	Parámetros: lista, de tipo &ListaVendedores
+	Dato de retorno: ninguno
+	Descripción de la función: registra un cliente en un vendedor de la lista
+                               recibida como parámetro
+*/
 
 void registrarCliente(ListaVendedores &lista) {
 
@@ -132,8 +186,15 @@ void registrarCliente(ListaVendedores &lista) {
     printf("ingrese su dirección:\n");
     leerLinea_texto(sizeof(buffer.direccion), buffer.direccion);
 
-    printf("ingrese su edad:\n");
-    buffer.edad = leerInt();
+    while(1) {
+        printf("ingrese su edad:\n");
+        buffer.edad = leerInt();
+        if(buffer.edad > 0 && buffer.edad < 120) {
+            break;
+        } else {
+            printf("\nLa edad ingresada no es válida, inténtelo nuevamente\n");
+        }
+    }   
 
     getchar();
     printf("ingrese su profesión:\n");
@@ -152,6 +213,14 @@ void registrarCliente(ListaVendedores &lista) {
 
     modificacion = true;
 }
+
+/*
+	Nombre de la función: calcularCobro_vendedor
+	Tipo de función: int
+	Parámetros: lista, de tipo ListaVendedores
+	Dato de retorno: total, de tipo int
+	Descripción de la función: calcula el total que debe de cobrar un vendedor
+*/
 
 int calcularCobro_vendedor(ListaVendedores lista) {
 
@@ -202,12 +271,20 @@ int calcularCobro_vendedor(ListaVendedores lista) {
     }
 }
 
+/*
+	Nombre de la función: buscarVendedor_rut
+	Tipo de función: int
+	Parámetros: lista, de tipo ListaVendedores
+	Dato de retorno: i, de tipo int
+	Descripción de la función: busca un vendedor por su rut, y devuelve su ID de existir
+*/
+
 int buscarVendedor_rut(ListaVendedores lista) {
 
     if(listaVendedores_vacia(lista)) {
         limpiarPantalla();
         printf("Error en función mostrarDatos_clientes: no hay vendedores registrados\n");
-        return 0;
+        return -1;
     }
 
     Vendedor tmp;
@@ -228,10 +305,19 @@ int buscarVendedor_rut(ListaVendedores lista) {
             return i;
         }
     }
+
     limpiarPantalla();
-    printf("\nRut no encontrado\n");
-    return 0; //en cualquier funcion en que se use esta funcion, el cero deberia ser un error
+    printf("\nError: RUT no encontrado\n");
+    return -1; //en cualquier parte en que se use esta funcion, el cero deberia ser un error
 }
+
+/*
+	Nombre de la función: buscarCliente_rut
+	Tipo de función: int
+	Parámetros: lista, de tipo ListaVendedores
+	Dato de retorno: i, de tipo int
+	Descripción de la función: busca un cliente por su rut, y devuelve su ID de existir
+*/
 
 void buscarCliente_rut(ListaVendedores lista) {
 
@@ -271,10 +357,21 @@ void buscarCliente_rut(ListaVendedores lista) {
     printf("\nRut no encontrado\n");    
 }
 
+/*
+	Nombre de la función: eliminarVendedor_rut
+	Tipo de función: void
+	Parámetros: lista, de tipo &ListaVendedores
+	Dato de retorno: ninguno
+	Descripción de la función: elimina una lista completa de vendedores
+*/
+
 void eliminarVendedor_rut(ListaVendedores &lista) {
+
     int id = buscarVendedor_rut(lista);
-    eliminarDato_listaVendedores(id, lista);
-    printf("\nVendedor eliminado\n"); 
+    if(id > 0) {
+        eliminarDato_listaVendedores(id, lista);
+        printf("\nVendedor eliminado\n"); 
+        modificacion = true;
+    }
     
-    modificacion = true;
 }

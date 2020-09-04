@@ -2,6 +2,18 @@
 #include "include/manejoArchivos.h"
 #include "include/listaVendedores.h"
 
+
+/*
+	Nombre de la función: extraerListaVendedores_binario
+	Tipo de función: void
+	Parámetros: lista, de tipo &listaVendedores
+	Dato de retorno: ninguno
+	Descripción de la función: lee datos desde el archivo definido en
+                               src/include/manejoArchivos.h y los guarda
+                               en la lista de vendedores recibida como 
+                               parámetro
+*/
+
 void extraerListaVendedores_binario(ListaVendedores &lista) {
     FILE* archivo_fuente = fopen("datos/ventas.bin", "rb");
     if(archivo_fuente == NULL) {
@@ -61,26 +73,39 @@ void extraerListaVendedores_binario(ListaVendedores &lista) {
     fclose(archivo_fuente);
 }
 
-void escribirListaVendedores_binario(ListaVendedores datos) {
+/*
+	Nombre de la función: guardarListaVendedores_binario
+	Tipo de función: void
+	Parámetros: datos, de tipo listaVendedores
+	Dato de retorno: ninguno
+	Descripción de la función: lee datos desde la lista de vendedores recibida como 
+                               parámetro y los guarda en formato binario en
+                               el archivo definido en 
+                               src/include/manejoArchivos.h
+*/
+
+void guardarListaVendedores_binario(ListaVendedores datos) {
     FILE* archivo_fuente = fopen("datos/ventas.bin", "wb");
     Vendedor bufferVendedores = {0};
     Cliente bufferClientes = {0};
 
-    for(int i = 1; i < largoLista_vendedores(datos); i++) {
+    if(!listaVendedores_vacia(datos)) {
+        
+        for(int i = 1; i < largoLista_vendedores(datos); i++) {
 
-        bufferVendedores = obtenerVendedor_lista(i, datos);
-        fwrite(&bufferVendedores, sizeof(struct Vendedor), 1, archivo_fuente);
+            bufferVendedores = obtenerVendedor_lista(i, datos);
+            fwrite(&bufferVendedores, sizeof(struct Vendedor), 1, archivo_fuente);
 
-        for(int j = 1; j < largoLista_clientes(bufferVendedores.clientes); j++) {
+            for(int j = 1; j < largoLista_clientes(bufferVendedores.clientes); j++) {
 
-            bufferClientes = obtenerCliente_lista(j, bufferVendedores.clientes);
-            fwrite(&bufferClientes, sizeof(Cliente), 1, archivo_fuente);
-            bufferClientes = {0};
+                bufferClientes = obtenerCliente_lista(j, bufferVendedores.clientes);
+                fwrite(&bufferClientes, sizeof(Cliente), 1, archivo_fuente);
+                bufferClientes = {0};
+            }
+            fwrite(FIN_VENDEDOR, sizeof(FIN_VENDEDOR), 1, archivo_fuente);
+            bufferVendedores = {0};
         }
-        fwrite(FIN_VENDEDOR, sizeof(FIN_VENDEDOR), 1, archivo_fuente);
-        bufferVendedores = {0};
     }
-
     fclose(archivo_fuente);
 }
 

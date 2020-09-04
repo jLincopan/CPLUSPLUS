@@ -13,6 +13,14 @@ void limpiarPantalla() { //solo funciona en sistemas tipo UNIX
     printf("\e[2J\e[H");
 }
 
+/*
+	Nombre de la función: mostrarDatos_vendedor
+	Tipo de función: void
+	Parámetros: vendedor, de tipo Vendedor
+	Dato de retorno: ninguno
+	Descripción de la función: muestra los datos del vendedor recibido como parámetro
+*/
+
 void mostrarDatos_vendedor(Vendedor vendedor) {
     printf(" | %-13s ", vendedor.nombre);
     printf(" | %-13s ", vendedor.apellido);
@@ -23,6 +31,14 @@ void mostrarDatos_vendedor(Vendedor vendedor) {
 	printf(" | %-3i ", vendedor.edad);
     printf(" | %-19s |", vendedor.profesion);
 }
+
+/*
+	Nombre de la función: mostrarDatos_cliente
+	Tipo de función: void
+	Parámetros: cliente, de tipo Cliente
+	Dato de retorno: ninguno
+	Descripción de la función: muestra los datos del cliente recibido como parámetro
+*/
 
 void mostrarDatos_cliente(Cliente cliente) {
     
@@ -36,6 +52,15 @@ void mostrarDatos_cliente(Cliente cliente) {
     printf(" | %-7li", cliente.deuda);
     printf(" | %-14s |\n", cliente.fechaCobro);
 }
+
+/*
+	Nombre de la función: mostrarDatos_clientes
+	Tipo de función: void
+	Parámetros: vendedores, de tipo &ListaVendedores
+	Dato de retorno: ninguno
+	Descripción de la función: muestra los datos de un vendedor de la lista recibida como
+                               parámetro
+*/
 
 void mostrarDatos_clientes(ListaVendedores &vendedores) {
 
@@ -81,6 +106,16 @@ void mostrarDatos_clientes(ListaVendedores &vendedores) {
  
 }
 
+/*
+	Nombre de la función: menuPrincipal
+	Tipo de función: void
+	Parámetros: vendedores, de tipo &ListaVendedores
+	Dato de retorno: ninguno
+	Descripción de la función: El menú principal... Recibe como parámetro la lista
+                               de vendedores con la que trabaja el programa
+                               (la que se guardará en el archivo)
+*/
+
 void menuPrincipal(ListaVendedores &vendedores) {
 
     int opcion = 0;
@@ -90,9 +125,11 @@ void menuPrincipal(ListaVendedores &vendedores) {
         printf("\n2) Registrar nuevo cliente\n");
         printf("\n3) Buscar vendedor por rut\n");
         printf("\n4) Buscar cliente por rut\n");
-        printf("\n5) Mostrar clientes\n");
-        printf("\n6) Calcular total a cobrar de un vendedor\n");
-        printf("\n7) Salir\n\n");
+        printf("\n5) Mostrar vendedores\n");
+        printf("\n6) Mostrar clientes\n");
+        printf("\n7) Calcular total a cobrar de un vendedor\n");
+        printf("\n8) Eliminar vendedor por rut\n");
+        printf("\n9) Salir\n\n");
 
         opcion = leerInt();
         getchar();
@@ -115,15 +152,23 @@ void menuPrincipal(ListaVendedores &vendedores) {
             limpiarPantalla();
             buscarCliente_rut(vendedores);
             break;
-        case 5: 
+        case 5:
+            limpiarPantalla();
+            imprimeLista_vendedores(vendedores);
+            break;
+        case 6: 
             limpiarPantalla();
             mostrarDatos_clientes(vendedores);
             break;
-        case 6:
+        case 7:
             limpiarPantalla();
             calcularCobro_vendedor(vendedores);
             break;
-        case 7:
+        case 8:
+            limpiarPantalla();
+            eliminarVendedor_rut(vendedores);
+            break;
+        case 9:
             limpiarPantalla();
             return;
         default:

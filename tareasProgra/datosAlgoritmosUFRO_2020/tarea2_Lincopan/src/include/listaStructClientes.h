@@ -17,7 +17,7 @@ struct nodo2{
 	}
 };
 
-struct ListaClientes
+struct ListaClientes //define las listas de clientes a usar
 {
 	struct nodo2* primero;
 	ListaClientes(){

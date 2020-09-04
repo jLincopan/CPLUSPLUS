@@ -11,13 +11,4 @@
 		long deuda = 0;
 		char fechaCobro[11] = {0};
 	};
-
-	struct nodoCliente{
-		Cliente dato = {0};
-		nodoCliente* sgte;
-	};
-
-	struct cabeceraCliente{
-		nodoCliente* primero;
-	};
 #endif

@@ -257,9 +257,10 @@ int calcularCobro_vendedor(ListaVendedores lista) {
         pausa();
         return 0;
     } else {
-        int total = 0;
 
-        for(int i = 1; i < largoLista; i++) {
+        int total = 0;
+        int largoListaClientes = largoLista_clientes(vendedor.clientes);
+        for(int i = 1; i < largoListaClientes; i++) {
             tmp = obtenerCliente_lista(i, vendedor.clientes);
             total = total + tmp.deuda;
         }

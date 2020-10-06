@@ -30,14 +30,14 @@ ArbolBin hijoIzq(ArbolBin n){
 
 bool existeHijoIzq(ArbolBin n) {
 	Arbol Ti = hijoIzq(n);
-	if(esNulo(Ti))
+	if(strncmp(NODO_NULO.nombre, n.primero->dato.dato.nombre, sizeof(NODO_NULO.nombre)) == 0)
 		return false;
 	return true;
 }
 
 bool existeHijoDer(ArbolBin n) {
 	Arbol Ti = hijoDer(n);
-	if(esNulo(Ti))
+	if(strncmp(NODO_NULO.nombre, n.primero->dato.dato.nombre, sizeof(NODO_NULO.nombre)) == 0)
 		return false;
 	return true;
 }
@@ -98,9 +98,7 @@ ArbolBin podarHijoDer(ArbolBin  & n){
 
 // Adicionales al TDA
 bool esHoja(ArbolBin n){
-	ArbolBin Ti = hijoIzq(n);
-	ArbolBin Td = hijoDer(n);
-	return esNodoTerminal(Ti) && esNodoTerminal(Td);
+	return (existeHijoIzq(n) && existeHijoDer(n));
 }
 
 bool esNulo(ArbolBin raiz){
@@ -108,11 +106,10 @@ bool esNulo(ArbolBin raiz){
 }
 
 bool esNodoTerminal(ArbolBin n){
-	datoArbol temp = etiqueta(n);
-	if(strncmp(temp.fecha_fallecimiento, NODO_NULO.fecha_fallecimiento, sizeof(NODO_NULO.fecha_fallecimiento)) == 0) {
-		return true;
-	} else {
+	if(existeHijoIzq(n) && existeHijoDer(n)) {
 		return false;
+	} else {
+		return true;
 	}
 }
 
@@ -155,4 +152,34 @@ void mostrarDatos(ArbolBin dato) {
 	datoArbol d = etiqueta(dato);
 
 	printf("Generación: %i Nombre: %s Nacimiento: %s Fallecimiento: %s\n",d.generacion, d.nombre, d.fecha_nacimiento, d.fecha_fallecimiento);
+}
+
+void mostrarNombre(ArbolBin dato) {
+	datoArbol d = etiqueta(dato);
+
+	printf("%s\n", d.nombre);
+}
+
+void mostrarArbolBinario(ArbolBin raiz) {
+
+	for(int i = 1; i <= 5 ; i++) {
+		mostrarNivel(raiz, i);
+		printf("\n");
+	}
+
+}
+
+void mostrarNivel(ArbolBin raiz, int nivel) {
+
+	if(esNodoTerminal(raiz)) {
+		return;
+	}
+
+	if(nivel == 1) {
+		printf("%s ", raiz.primero->dato.dato.nombre);
+	} else if(nivel > 1) {
+		mostrarNivel(hijoIzq(raiz), nivel-1);
+		mostrarNivel(hijoDer(raiz), nivel-1);
+	}	
+
 }

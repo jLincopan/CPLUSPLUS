@@ -26,5 +26,7 @@
     void ordenPosterior(ArbolBin n);
     datoArbol registrarDatos(unsigned int generacion, const char nombre[], const char nacimiento[], const char fallecimiento[]);
     void mostrarDatos(ArbolBin dato);
+    void mostrarNombre(ArbolBin dato);
+    void mostrarNivel(ArbolBin raiz, int nivel);
     void mostrarArbolBinario(ArbolBin raiz);
 #endif

@@ -98,7 +98,7 @@ ArbolBin podarHijoDer(ArbolBin  & n){
 
 // Adicionales al TDA
 bool esHoja(ArbolBin n){
-	return (existeHijoIzq(n) && existeHijoDer(n));
+	return (esNodoTerminal(hijoIzq(n)) && esNodoTerminal(hijoDer(n)));
 }
 
 bool esNulo(ArbolBin raiz){
@@ -106,11 +106,12 @@ bool esNulo(ArbolBin raiz){
 }
 
 bool esNodoTerminal(ArbolBin n){
-	if(existeHijoIzq(n) && existeHijoDer(n)) {
-		return false;
-	} else {
+	
+	if(strncmp(n.primero->dato.dato.nombre, NODO_NULO.nombre, sizeof(NODO_NULO.nombre)) == 0) {
 		return true;
 	}
+	
+	return false;
 }
 
 void ordenSimetrico(ArbolBin n){

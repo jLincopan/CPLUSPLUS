@@ -3,6 +3,8 @@
     #include "../arbol/arbol.h"
     #include "arbolBinStruct.h"
 
+    static datoArbol NODO_NULO = {0};
+
     ArbolBin arbolToBin(Arbol n);
     ArbolBin creaNodo(datoArbol u);
     ArbolBin hijoIzq(ArbolBin n);
@@ -27,6 +29,15 @@
     datoArbol registrarDatos(unsigned int generacion, const char nombre[], const char nacimiento[], const char fallecimiento[]);
     void mostrarDatos(ArbolBin dato);
     void mostrarNombre(ArbolBin dato);
+    void buscarPorNombre(ArbolBin n, ArbolBin &buffer, const char nombre[sizeof(NODO_NULO.nombre)]);
     void mostrarNivel(ArbolBin raiz, int nivel);
     void mostrarArbolBinario(ArbolBin raiz);
+    void buscarPadrePorNombre(ArbolBin &raiz);
+    void encontrarPadre(ArbolBin raiz, char nombre[sizeof(NODO_NULO.nombre)], ArbolBin &buffer);
+    void buscarHijosPorNombre(ArbolBin raiz);
+    void familiaresConVida(ArbolBin &raiz);
+    void editarDatosPorNombre(ArbolBin raiz);
+    int leerInt();
+    void generacionPorNombre(ArbolBin raiz);
+    void familiarMasLongevo(ArbolBin raiz);
 #endif

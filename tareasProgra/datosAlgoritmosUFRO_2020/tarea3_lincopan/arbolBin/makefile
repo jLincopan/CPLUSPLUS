@@ -1,4 +1,8 @@
 all:
+	cd .. && cd arbol && cd lista && $(MAKE)
+	cd .. && cd arbol && cd pila && $(MAKE)
+	cd .. && cd arbol && $(MAKE)
+
 	cp ../arbol/bin/*.o ./bin/
 	g++ -g -o ./bin/arbolBin.o arbolBin.cpp -c
 	g++ -g -o ./bin/main.o main.cpp -c

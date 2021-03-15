@@ -1,0 +1,23 @@
+
+-Tuplas vs listas: Las listas pueden cambiar los valores que almacenan, las tuplas son inmutables.
+ Para crear una lista: [], para crear una tupla: ()
+    
+-En las tuplas puedes buscar algo con el método .index
+
+-En las tuplas, puedes contar las veces que se repite cierto elemento con .count
+
+-Los conjuntos son colecciones desordenadas de elementos únicos, se crean con {}.
+Se puede eliminar elementos repetidos de una lista casteandola como conjunto
+
+-Salidas: 
+    p =  "Un texto {} y un múmero {}.format(10,20)". Al imprimir p queda: 
+    print(p): 'Un texto 10 y un número 20'
+    * .format también acepta cadenas de texto
+
+
+    también se puede hacer algo así como:
+    print("Un texto '{texto}' y un número '{numero}'".format(texto = "hola k ase", numero=123))
+    resultado: Un texto 'hola k ase' y un número '123'
+    
+    
+

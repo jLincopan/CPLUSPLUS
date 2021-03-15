@@ -1,0 +1,2 @@
+Solo es un archivo de texto que está para que git suba la carpeta obj,
+y así no haya problemas con que la carpeta no existe a la hora de compilar

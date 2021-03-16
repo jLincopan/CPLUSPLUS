@@ -1,0 +1,23 @@
+Tutoriales: https://www.youtube.com/watch?v=VQAKkuLL31g&list=PLetF-YjXm-sCH6FrTz4AQhfH6INDQvQSn&index=2
+
+*Usando nasm en un sistema linux x86_64
+
+Conceptos: 
+    -Registros: son memorias de alta velocidad y baja capacidad para
+    guardar temporalmente datos que usará el procesador.
+
+    -Llamadas del systema(syscalls): Son mecanismos por el que el núcleo 
+    del sistema operativo provee a los programas de "servicios" como 
+    acceder a la memoria, a los periféricos, etc.
+
+    -Secciones: Sirven para especificar al linker dónde estarán ciertos
+    datos que necesita para crear correctamente el programa ejecutable.
+
+        .data: Donde se guardan los datos ya definidos, algo así como
+               las #define en c.
+        .bss:  Donde se reserva memoria para las variables aún Sirven
+               definir del programa. 
+        .text: Donde se guarda el código ejecutable.
+
+
+

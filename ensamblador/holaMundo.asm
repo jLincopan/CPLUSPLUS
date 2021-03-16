@@ -13,7 +13,7 @@ _start: ; si el compilador no encuentra _start, dará error. Es donde por conven
     ;Cargando en memoria los parámetros de la llamada
     mov rdi, 1 ; Le especifica a "system_write" que escriba en stdout (standard output)
     mov rsi, texto ; Se le dice que esos son los datos a escribir
-    mov rdx, 14 ; El tamaño en bytes de los datos a escribit
+    mov rdx, 14 ; El tamaño en bites de los datos a escribit
     syscall ; Se hace la llamada, "system_write" toma los parámetros que encuentra
             ; en los registros
 
